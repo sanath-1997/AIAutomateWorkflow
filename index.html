@@ -9,7 +9,7 @@
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,a{font:inherit}
     body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 82% 12%,rgba(127,148,255,.17),transparent 31%),radial-gradient(circle at 9% 62%,rgba(184,157,235,.11),transparent 28%),#fff}
     body:after{content:"";position:fixed;inset:0;z-index:-1;opacity:.2;background-image:linear-gradient(rgba(73,89,130,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(73,89,130,.08) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
-    .wrap{width:min(1080px,calc(100% - 40px));margin:auto}.hero{min-height:720px;padding:110px 0 80px;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}.lead{margin:0;font-size:clamp(45px,5.4vw,72px);line-height:1.04;letter-spacing:-.055em;font-weight:750}.sublead{margin:30px 0 0;color:var(--muted);font-size:clamp(18px,2vw,23px);line-height:1.58}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.primary,.secondary,.pay,.share{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:13px;padding:16px 21px;text-decoration:none;font-weight:800;cursor:pointer}.primary,.pay{background:var(--ink);color:#fff;box-shadow:0 13px 30px rgba(25,34,56,.17)}.secondary{border:1px solid rgba(25,34,56,.16);background:rgba(255,255,255,.75);color:var(--ink)}
+    .wrap{width:min(1080px,calc(100% - 40px));margin:auto}.siteHeader{padding:22px 0;border-bottom:1px solid var(--line);background:rgba(255,255,255,.78);backdrop-filter:blur(14px)}.brand{display:inline-flex;align-items:center;gap:13px;color:var(--ink);text-decoration:none}.brandLogo{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(145deg,var(--blue),var(--violet));color:#fff;font-family:Georgia,serif;font-size:22px;font-weight:800;box-shadow:0 10px 24px rgba(82,103,232,.22)}.brandTitle{font-size:20px;font-weight:800;letter-spacing:-.025em}.hero{min-height:720px;padding:85px 0 80px;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}.lead{margin:0;font-size:clamp(45px,5.4vw,72px);line-height:1.04;letter-spacing:-.055em;font-weight:750}.sublead{margin:30px 0 0;color:var(--muted);font-size:clamp(18px,2vw,23px);line-height:1.58}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.primary,.secondary,.pay,.share{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:13px;padding:16px 21px;text-decoration:none;font-weight:800;cursor:pointer}.primary,.pay{background:var(--ink);color:#fff;box-shadow:0 13px 30px rgba(25,34,56,.17)}.secondary{border:1px solid rgba(25,34,56,.16);background:rgba(255,255,255,.75);color:var(--ink)}
     .graphic{position:relative;height:430px}.glow{position:absolute;inset:70px;border-radius:50%;background:rgba(98,116,232,.14);filter:blur(30px)}.core{position:absolute;z-index:3;inset:137px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(145deg,#fff,#e8ebff);box-shadow:0 30px 70px rgba(77,92,172,.22)}.core strong{font:47px Georgia;color:var(--blue)}.core small{font-size:8px;font-weight:800;letter-spacing:.18em;color:#7d87a0}.orbit{position:absolute;border:1px solid rgba(82,103,232,.23);border-radius:50%;animation:spin 18s linear infinite}.o1{inset:31px}.o2{inset:89px;border-style:dashed;animation-direction:reverse;animation-duration:12s}.tag{position:absolute;z-index:4;padding:11px 15px;border:1px solid rgba(82,103,232,.15);border-radius:11px;background:rgba(255,255,255,.82);color:#68748b;font-size:10px;font-weight:800;letter-spacing:.08em;box-shadow:0 14px 34px rgba(48,62,105,.11)}.t1{left:5px;top:95px}.t2{right:0;top:150px}.t3{left:42px;bottom:58px}@keyframes spin{to{transform:rotate(360deg)}}
     .content{padding:100px 0;border-top:1px solid var(--line)}h1{margin:0;font-size:clamp(38px,5vw,58px);letter-spacing:-.045em}.intro{margin:18px 0 42px;color:var(--muted);font-size:18px}.benefits{list-style:none;padding:0;margin:0;display:grid;gap:14px}.benefits li{position:relative;padding:25px 28px 25px 62px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.75);box-shadow:0 14px 38px rgba(43,57,95,.05);color:#3f4b62;font-size:17px;line-height:1.55}.benefits li:before{content:"✓";position:absolute;left:25px;top:24px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(82,103,232,.11);color:var(--blue);font-size:12px;font-weight:800}.benefits strong{display:block;margin-bottom:5px;color:var(--ink);font-size:18px}
     .note{display:grid;grid-template-columns:auto 1fr;gap:30px;padding:55px;border:1px solid rgba(82,103,232,.14);border-radius:26px;background:linear-gradient(135deg,#f2f4ff,#faf7ff)}.noteIcon{width:72px;height:72px;display:grid;place-items:center;border-radius:22px;background:linear-gradient(145deg,var(--blue),var(--violet));color:#fff;font-size:34px}.note h2{margin:0;font-size:31px}.note p,.closing p{color:var(--muted);line-height:1.7}.closing{padding:90px 0;display:flex;align-items:center;justify-content:space-between;gap:35px}.closing p{max-width:720px;font-size:19px}.footer{padding:28px 0 38px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#7f899d;font-size:12px}.footer p{margin:0 0 7px}.footer a,.footer button{color:#657088;background:none;border:0;padding:0;text-decoration:none;cursor:pointer}.footer nav{display:flex;gap:20px}
@@ -19,6 +19,14 @@
   </style>
 </head>
 <body>
+  <header class="siteHeader">
+    <div class="wrap">
+      <a class="brand" href="#" aria-label="AI Workflow Course home">
+        <span class="brandLogo" aria-hidden="true">AI</span>
+        <span class="brandTitle">AI Workflow Course</span>
+      </a>
+    </div>
+  </header>
   <main>
     <section class="hero wrap">
       <div>
@@ -64,7 +72,7 @@ Automate your existing workflow with AI and save up to 40% of your work time. �
 
 It will also help you build a personalised app in your name. 📱
 
-Link 🔗 : https://ai-automate-workflow.vercel.app`
+Link 🔗 :https://ai-automate-workflow.vercel.app/`
         };
         if(navigator.share)await navigator.share(data);
         else await navigator.clipboard.writeText(data.text);
