@@ -30,29 +30,19 @@
     </div>
 
     <script>
-        const parameters = new URLSearchParams(window.location.search);
-        const paymentId = parameters.get("razorpay_payment_id");
+     
+    const accessDetails = {
+        paid: true,
+        unlockedAt: new Date().toISOString()
+    };
 
-        if (paymentId) {
-            const accessDetails = {
-                paid: true,
-                paymentId: paymentId,
-                unlockedAt: new Date().toISOString()
-            };
+    localStorage.setItem(
+        "paidContentAccess",
+        JSON.stringify(accessDetails)
+    );
 
-            localStorage.setItem(
-                "paidContentAccess",
-                JSON.stringify(accessDetails)
-            );
+    window.location.replace("final-page.html");
 
-            window.location.replace("final-page.html");
-        } else {
-            document.querySelector(".message").innerHTML = `
-                <h1>Payment not confirmed</h1>
-                <p>Please complete the payment before accessing the content.</p>
-                <a href="index.html">Return to payment page</a>
-            `;
-        }
     </script>
 </body>
 </html>
