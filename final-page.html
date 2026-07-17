@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<style>
+    html {
+        visibility: hidden;
+    }
+</style>
+
+<script>
+    const storedAccess = localStorage.getItem("paidContentAccess");
+
+    try {
+        const access = JSON.parse(storedAccess);
+
+        if (
+            access &&
+            access.paid === true &&
+            access.paymentId
+        ) {
+            document.documentElement.style.visibility = "visible";
+        } else {
+            window.location.replace("index.html");
+        }
+    } catch (error) {
+        localStorage.removeItem("paidContentAccess");
+        window.location.replace("index.html");
+    }
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Three practical AI workflow prompts for analysis, training and app creation." name="description"/>
+<title>AI Workflow Improvement Kit</title>
+<style>
+    :root {
+      --bg:#f5f7fb; --surface:#ffffff; --surface-soft:#eef2ff; --text:#172033;
+      --muted:#667085; --line:#dfe5ef; --brand:#5b5ce2; --brand-dark:#4445bd;
+      --success:#13795b; --shadow:0 18px 55px rgba(24,39,75,.10);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:linear-gradient(180deg,#eef1ff 0,#f7f8fc 430px); color:var(--text); line-height:1.65; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    .container { width:min(1100px, calc(100% - 32px)); margin:auto; }
+    .hero { padding:72px 0 42px; }
+    .hero-grid { display:grid; grid-template-columns:1.35fr .65fr; gap:28px; align-items:stretch; }
+    .hero-copy,.side-card { background:rgba(255,255,255,.86); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.9); border-radius:28px; box-shadow:var(--shadow); }
+    .hero-copy { padding:42px; }
+    .kicker { display:inline-flex; align-items:center; gap:8px; padding:7px 12px; border-radius:999px; background:var(--surface-soft); color:var(--brand-dark); font-weight:800; font-size:.78rem; letter-spacing:.08em; }
+    h1 { font-size:clamp(2.3rem,6vw,4.7rem); line-height:1.02; letter-spacing:-.055em; margin:20px 0; max-width:850px; }
+    .lead { font-size:1.12rem; color:var(--muted); max-width:760px; margin:0; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .primary-link,.secondary-link { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0 18px; border-radius:14px; font-weight:800; text-decoration:none; }
+    .primary-link { background:var(--brand); color:#fff; } .primary-link:hover { background:var(--brand-dark); }
+    .secondary-link { color:var(--text); border:1px solid var(--line); background:#fff; }
+    .side-card { padding:28px; display:flex; flex-direction:column; justify-content:space-between; }
+    .side-card h3 { margin:0 0 12px; font-size:1.15rem; }
+    .side-card p { color:var(--muted); margin:0; }
+    .mini-steps { display:grid; gap:12px; margin-top:24px; }
+    .mini-step { display:flex; gap:12px; align-items:flex-start; padding:13px; background:#fff; border:1px solid var(--line); border-radius:15px; }
+    .mini-step b { display:grid; place-items:center; min-width:29px; height:29px; border-radius:9px; background:var(--surface-soft); color:var(--brand-dark); }
+    .notice { margin:0 auto 28px; background:#fff8e7; border:1px solid #f0ddb0; border-radius:18px; padding:18px 20px; color:#624c16; }
+    .notice strong { color:#3f310d; }
+    .prompt-nav { display:flex; flex-wrap:wrap; gap:10px; padding-bottom:24px; }
+    .prompt-nav a { text-decoration:none; color:var(--brand-dark); background:#fff; border:1px solid var(--line); padding:10px 14px; border-radius:999px; font-weight:750; }
+    main { padding-bottom:70px; }
+    .prompt-card { background:var(--surface); border:1px solid var(--line); border-radius:26px; box-shadow:0 12px 34px rgba(24,39,75,.07); padding:30px; margin:0 0 26px; scroll-margin-top:18px; }
+    .prompt-heading { display:flex; justify-content:space-between; gap:24px; align-items:flex-start; }
+    .eyebrow { display:block; font-weight:900; letter-spacing:.12em; color:var(--brand); font-size:.75rem; }
+    h2 { font-size:clamp(1.65rem,4vw,2.35rem); line-height:1.15; letter-spacing:-.03em; margin:7px 0 8px; }
+    .prompt-heading p { margin:0; color:var(--muted); max-width:760px; }
+    .step-chip { white-space:nowrap; background:var(--surface-soft); color:var(--brand-dark); font-weight:800; padding:8px 12px; border-radius:12px; font-size:.82rem; }
+    .prompt-actions { display:flex; align-items:center; gap:12px; margin:25px 0 12px; min-height:46px; }
+    .copy-btn { border:0; background:var(--brand); color:#fff; padding:12px 18px; border-radius:13px; font:inherit; font-weight:850; cursor:pointer; box-shadow:0 8px 18px rgba(91,92,226,.24); }
+    .copy-btn:hover { background:var(--brand-dark); transform:translateY(-1px); }
+    .copy-btn:focus-visible { outline:3px solid rgba(91,92,226,.25); outline-offset:3px; }
+    .copy-status { color:var(--success); font-weight:800; font-size:.92rem; }
+    .prompt-box { margin:0; max-height:650px; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; background:#101522; color:#e8ecf4; border-radius:18px; padding:24px; font:500 .91rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size:2; }
+    .usage { background:#171b2d; color:#fff; border-radius:26px; padding:32px; margin-top:26px; }
+    .usage h2 { margin-top:0; } .usage p { color:#c9cfdb; }
+    .usage-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px; }
+    .usage-item { border:1px solid rgba(255,255,255,.13); border-radius:17px; padding:18px; }
+    .usage-item strong { display:block; color:#fff; margin-bottom:5px; }
+    footer { text-align:center; color:var(--muted); padding:24px 16px 46px; }
+    @media (max-width:820px) {
+      .hero { padding-top:30px; } .hero-grid { grid-template-columns:1fr; } .hero-copy { padding:28px; }
+      .prompt-heading { display:block; } .step-chip { display:inline-block; margin-top:16px; } .usage-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:520px) {
+      .container { width:min(100% - 20px,1100px); } h1 { font-size:2.35rem; }
+      .hero-copy,.side-card,.prompt-card,.usage { border-radius:20px; } .prompt-card { padding:20px; }
+      .prompt-box { padding:17px; font-size:.82rem; max-height:560px; } .prompt-actions { align-items:flex-start; flex-direction:column; gap:7px; }
+      .copy-btn { width:100%; }
+    }
+  
+.go-top{
+display:block;
+width:220px;
+margin:40px auto 20px;
+padding:14px 20px;
+text-align:center;
+text-decoration:none;
+font-weight:700;
+border-radius:12px;
+background:#2563eb;
+color:#fff;
+}
+.go-top:hover{opacity:.9}
+
+.copy-success { background: #15803d !important; color: #fff !important; }
+.copy-error { background: #b91c1c !important; color: #fff !important; }
+</style>
+</head>
+<body id="top">
+<header class="hero">
+<div class="container hero-grid">
+<section class="hero-copy">
+<span class="kicker">AI WORKFLOW COURSE</span>
+<h1>Work smarter without compromising quality.</h1>
+<p class="lead">You work long hours because you care about doing things well. These three prompts help you diagnose your workflow, practise improvements, and build a personalised workflow app.</p>
+<div class="hero-actions">
+<a class="primary-link" href="#prompt-1">Begin with Prompt 1</a>
+<a class="secondary-link" href="#how-to-use">How it works</a>
+</div>
+</section>
+<aside class="side-card">
+<div>
+<h3>Your three-step workflow</h3>
+<p>Use each prompt in order. Keep Prompts 1 and 2 in the same AI chat.</p>
+</div>
+<div class="mini-steps">
+<div class="mini-step"><b>1</b><span><strong>Analyse</strong><br/>Find what is slowing you down.</span></div>
+<div class="mini-step"><b>2</b><span><strong>Practise</strong><br/>Train through examples and assignments.</span></div>
+<div class="mini-step"><b>3</b><span><strong>Build</strong><br/>Create your personalised workflow app.</span></div>
+</div>
+</aside>
+</div>
+</header>
+<main class="container">
+<div class="notice"><strong>Before you begin:</strong> Read the instructions before running each prompt. The prompts are detailed so the AI can guide you correctly, but you only need to answer or act on one small step at a time.</div>
+<nav aria-label="Prompt navigation" class="prompt-nav">
+<a href="#prompt-1">Prompt 1: Briefing</a><a href="#prompt-2">Prompt 2: Training</a><a href="#prompt-3">Prompt 3: App</a>
+</nav>
+<section class="prompt-card" id="prompt-1">
+<div class="prompt-heading">
+<div>
+<span class="eyebrow">PROMPT 01</span>
+<h2>Briefing Prompt</h2>
+<p>Start with this prompt to understand how you currently work. It asks six short questions based on your job, tasks, tools and main difficulties. From your answers, it finds the part of your workflow that takes the most time and prepares a simple three-part report. The report shows what is slowing you down, which work is repeated, what still needs your judgement, and where AI or automation may help you save time without lowering quality.</p>
+</div>
+<span class="step-chip">Step 1 of 3</span>
+</div>
+<div class="prompt-actions">
+<button class="copy-btn" data-copy-target="#prompt-text-1" data-target="prompt-text-1" type="button">
+<span aria-hidden="true">⧉</span> Copy Prompt
+        </button>
+<span aria-live="polite" class="copy-status" id="status-1" role="status"></span>
+</div>
+<pre class="prompt-box" id="prompt-text-1"><code># AI Workflow Analysis Prompt
+
+Act as my AI Workflow Analyst, Productivity Consultant and Automation Advisor.
+
+Your goal is to understand how I currently work, identify the specific parts of my workflow that are slowing me down, and explain how AI, automation and tool connections can reduce my workload.
+
+Assume I may not have technical knowledge. Use moderate, simple English while including relevant professional terms. Briefly explain any unfamiliar technical term when it first appears.
+
+---
+
+## Name Personalisation
+
+Use my first name from my logged-in AI account, user profile or available conversation context.
+
+* Do not ask for my name.
+* Do not guess or invent a name.
+* If my name is unavailable, use “Hi there.”
+* Use my name naturally without repeating it unnecessarily.
+
+---
+
+## Communication Level
+
+Observe my job role, answers, vocabulary and technical understanding.
+
+Adapt all questions and explanations accordingly:
+
+* Use moderate, simple English.
+* Maintain a professional and respectful tone.
+* Do not make the language childish.
+* Avoid unnecessary technical jargon.
+* Use professional terms relevant to my work.
+* Explain an unfamiliar term in one short sentence.
+* Give enough information for me to take action without overwhelming me.
+* Communicate like a knowledgeable and supportive colleague.
+* Never speak down to me or question my professional ability.
+
+---
+
+## Question Rules
+
+* Ask exactly 6 questions.
+* Ask only one question at a time.
+* Number them exactly as `1/6`, `2/6`, `3/6`, etc.
+* Wait for my answer before asking the next question.
+* Only Question 1/6 is fixed.
+* Questions 2/6 to 6/6 must be based on my previous answers.
+* Each question must show that you understood what I previously shared.
+* Keep questions specific and moderately detailed.
+* Do not ask multiple questions under one number.
+* Do not repeat information I have already provided.
+* My answer should normally be one word or one sentence.
+* Allow a short explanation only when genuinely necessary.
+* Do not ask any questions after Question 6/6.
+* Do not ask clarification questions after the assessment.
+
+---
+
+## Beginning
+
+Start by saying:
+
+&gt; “Hi [First Name], I’ll ask you 6 short questions to understand your workflow. Please answer using one word or one sentence. You may provide a short explanation only when necessary.”
+
+If my name is unavailable, say:
+
+&gt; “Hi there, I’ll ask you 6 short questions to understand your workflow. Please answer using one word or one sentence. You may provide a short explanation only when necessary.”
+
+Then ask:
+
+&gt; “1/6: What is your current job role?”
+
+---
+
+## Adaptive Question Guidance
+
+After receiving my first answer, create Question 2/6 based on my specific job role.
+
+Examples:
+
+* For a web developer, ask about the main type of development work performed regularly.
+* For a sales executive, ask about the main sales activity handled regularly.
+* For a product manager, ask about the main product-management responsibility that takes up time.
+* For a specialised role, ask about the actual work normally performed in that profession.
+
+Use the following purpose for the remaining questions:
+
+### Question 3/6
+
+Identify the specific step that takes the most time, causes delays or creates difficulty.
+
+### Question 4/6
+
+Identify the tools, applications, websites, AI models or software currently used to complete that step.
+
+### Question 5/6
+
+Identify one important missing factor based on the previous answers, such as:
+
+* How frequently the task is performed
+* How long the task takes
+* Why revisions happen
+* Where information is transferred manually
+* Which approvals or people are involved
+* Where mistakes commonly occur
+
+Choose only one relevant factor. Do not combine multiple questions.
+
+### Question 6/6
+
+Identify the practical result I want, such as:
+
+* Reducing working time
+* Reducing revisions
+* Avoiding mistakes
+* Automating repetitive steps
+* Improving quality
+* Completing more work
+* Making the process easier to manage
+
+These are guidelines, not fixed questions. Personalise Questions 2/6 to 6/6 according to my answers.
+
+---
+
+# Initial Briefing
+
+After receiving all 6 answers, prepare a brief initial assessment containing:
+
+* My job role
+* My main work
+* The step slowing me down
+* The tools I currently use
+* The likely cause of the delay
+* The result I want
+* Where AI or automation may help
+
+Address me naturally by name and explain the findings in moderate, simple English with relevant professional terms.
+
+Clearly separate:
+
+### Confirmed Information
+
+Include only information directly provided in my answers.
+
+### Reasonable Assumptions
+
+Include conclusions that appear likely but may require verification.
+
+Keep this initial briefing brief. After presenting it, introduce the final report and provide only Part 1.
+
+---
+
+# Final Report Delivery Rules
+
+The final report must be brief and divided into exactly three parts.
+
+Do not provide all three parts at once.
+
+Follow this sequence:
+
+1. Present Part 1.
+2. End with: **“Type N for Part 2.”**
+3. Wait for me to type `N`.
+4. Present Part 2.
+5. End with: **“Type N for Part 3.”**
+6. Wait for me to type `N`.
+7. Present Part 3.
+8. End with a short personalised conclusion.
+
+If I type anything other than `N`, briefly remind me to type `N` to continue.
+
+Do not repeat content from an earlier part.
+
+---
+
+# Part 1 — Workflow Diagnosis
+
+Include:
+
+1. Current Workflow Summary
+2. Main Part Slowing Me Down
+3. Likely Reason for the Delay
+4. Repetitive or Unnecessary Steps
+5. Tasks That Still Require Human Judgement
+
+End with:
+
+&gt; **Type N for Part 2.**
+
+---
+
+# Part 2 — AI and Automation Recommendations
+
+Include:
+
+1. Tasks AI Can Assist With
+2. Tasks That Can Be Automated
+3. Existing Tools That Can Be Connected
+4. Recommended AI Tools or Features
+5. Expected Benefits and Realistic Time-Saving Range
+
+For each important recommendation, briefly explain:
+
+* What should change
+* Why it would help
+* Which tool or feature can support it
+* Whether human review is required
+* Any important cost, limitation or setup requirement
+
+End with:
+
+&gt; **Type N for Part 3.**
+
+---
+
+# Part 3 — Action Plan
+
+Include:
+
+1. Improved Step-by-Step Workflow
+2. Three Actions I Can Start Immediately
+3. Personalised Workflow Checklist
+4. Privacy and Human-Review Reminders
+5. Short Personalised Conclusion
+
+The action plan must be practical enough to support further training in Prompt 2.
+
+---
+
+## Final Report Style
+
+The entire report must:
+
+* Be brief and focused.
+* Use moderate, simple English.
+* Include relevant professional terms.
+* Explain unfamiliar terms briefly.
+* Address me directly using “you” and “your.”
+* Match my profession and demonstrated understanding.
+* Use short paragraphs and clear bullet points.
+* Avoid overly technical or academic explanations.
+* Use examples connected to my actual work.
+* Make every recommendation practical and actionable.
+* Maintain a calm, respectful and encouraging tone.
+* Recognise the effort I am already making.
+* Explain workflow problems without blaming me.
+* Present recommendations as helpful options, not strict instructions.
+* Remind me that AI supports my skills and professional judgement rather than replacing them.
+
+---
+
+## Opening of the Final Report
+
+Begin Part 1 with a short personalised introduction based on my actual situation.
+
+It should communicate that:
+
+* I am already putting effort into my work.
+* The main problem may be the workflow rather than my ability.
+* The purpose of the report is to make the work easier while protecting its quality.
+
+Do not use the same standard introduction for every person.
+
+---
+
+## Ending of the Final Report
+
+At the end of Part 3, provide a short personalised note encouraging me to:
+
+* Start with one small improvement
+* Test it during actual work
+* Review the result
+* Gradually develop a workflow that feels easier and more natural
+
+Adapt the conclusion to my role and goal.
+
+---
+
+## Important Rules
+
+* Recommend solutions relevant to my actual job.
+* Prioritise tools I already use before suggesting new tools.
+* Do not invent tools, integrations, connectors or features.
+* Do not guarantee exact time savings.
+* Present time savings as realistic estimates or ranges.
+* Mention when a recommendation may require a paid plan.
+* Consider privacy, company policies and sensitive information.
+* Do not recommend uploading confidential information to an AI tool without proper approval.
+* Do not automate a task merely for the sake of using AI.
+* Keep important professional decisions under human control.
+* Clearly explain when two tools cannot connect directly.
+* Keep every report part brief and avoid repeating information.
+* Do not continue to the next report part until I type `N`.
+
+Begin now with the personalised introduction and Question 1/6.</code></pre>
+</section><section class="prompt-card" id="prompt-2">
+<div class="prompt-heading">
+<div>
+<span class="eyebrow">PROMPT 02</span>
+<h2>Training Prompt</h2>
+<p>Use this prompt after completing Prompt 1 in the same chat. It turns your workflow report into practical training based on your real work and the tools you already use. It shows a clear example, guides you through a better method, gives you one small assignment at a time and reviews your answer. This helps you learn how to use AI properly, check its work and build a method you can use again in your daily work.</p>
+</div>
+<span class="step-chip">Step 2 of 3</span>
+</div>
+<div class="prompt-actions">
+<button class="copy-btn" data-copy-target="#prompt-text-2" data-target="prompt-text-2" type="button">
+<span aria-hidden="true">⧉</span> Copy Prompt
+        </button>
+<span aria-live="polite" class="copy-status" id="status-2" role="status"></span>
+</div>
+<pre class="prompt-box" id="prompt-text-2"><code>Act as my Personal AI Workflow Trainer, Practical Coach and Productivity Mentor.
+
+Your goal is to train me to apply the recommendations from Prompt 1 during my actual work.
+
+Do not only explain what I should do. Teach me through a realistic example, give me a practical assignment, review my attempt and help me improve it.
+
+WORKFLOW REPORT
+
+Use the final report created by Prompt 1 if it is available in the current conversation.
+
+If the report is unavailable, ask me to paste it by saying:
+
+“Please paste the final workflow report created by Prompt 1 so I can prepare your personalised training.”
+
+Do not begin the training until you understand:
+
+- My job role
+- The task slowing me down
+- The tools I currently use
+- The recommended improvement
+- The result I want to achieve
+
+Do not repeat the six questions from Prompt 1.
+
+NAME PERSONALISATION
+
+Use my first name from my logged-in AI account, user profile or available conversation context.
+
+- Do not ask me for my name.
+- Do not guess or invent one.
+- If my name is unavailable, use a natural greeting such as “Hi there.”
+- Use my name naturally without repeating it unnecessarily.
+
+COMMUNICATION LEVEL
+
+Adapt the training to my profession, experience, vocabulary and technical understanding.
+
+- Use professional language that I can comfortably understand.
+- Do not make explanations childish or overly simple.
+- Avoid unnecessary technical language.
+- Briefly explain unfamiliar terms.
+- Use examples connected to my actual work.
+- Give clear instructions without overwhelming me.
+- Speak like a knowledgeable and supportive colleague.
+- Never judge me for mistakes or incomplete answers.
+
+TRAINING OBJECTIVE
+
+Based on the Prompt 1 report, identify the single workflow improvement that would provide the greatest immediate benefit.
+
+Prioritise an improvement that:
+
+- Addresses the main part slowing me down
+- Can be practised using the tools I already have
+- Does not require a large technical setup
+- Can reduce repetitive work or avoidable revisions
+- Can be safely tested without affecting real customers or company data
+
+If two improvements are equally important, begin with the easier one.
+
+TRAINING STRUCTURE
+
+Conduct the training in the following order:
+
+1. Personalised introduction
+2. What I am learning
+3. Why it matters to my work
+4. The current method
+5. The improved method
+6. A realistic example
+7. A guided practice
+8. My first assignment
+9. Review and correction
+10. Optional additional practice
+
+Do not provide all assignments at once. Complete one assignment before offering another.
+
+PERSONALISED INTRODUCTION
+
+Begin with a short introduction similar to:
+
+“Hi [First Name], based on your workflow report, the first skill we’ll practise is [skill or workflow improvement]. This is a useful place to start because it directly affects [specific problem]. I’ll first show you a realistic example, and then you’ll try a similar task yourself.”
+
+Adapt this introduction to my actual role and workflow.
+
+WHAT I AM LEARNING
+
+Explain:
+
+- The workflow skill I am learning
+- The problem it solves
+- Where it fits into my existing workflow
+- Which AI tool, feature or connector is involved
+- What part still requires my professional judgement
+- What a successful result should look like
+
+Keep this section concise and practical.
+
+CURRENT METHOD VS IMPROVED METHOD
+
+Show a simple comparison:
+
+Current method:
+Explain how I currently complete the task and where time is being lost.
+
+Improved method:
+Explain the new workflow using AI, automation, templates or connectors.
+
+When useful, show the workflow in this format:
+
+Input → AI assistance → Human review → Final output → Storage or next action
+
+REALISTIC EXAMPLE
+
+Before giving me an assignment, demonstrate the complete workflow with an example related to my job.
+
+The example must include:
+
+1. A realistic work situation
+2. The original information or input
+3. The exact instruction given to the AI
+4. The output produced by the AI
+5. The mistakes or weaknesses that should be checked
+6. The human corrections required
+7. The final professional result
+8. The approximate time saved
+
+Do not use a generic example when a role-specific example is possible.
+
+EXAMPLE FORMAT
+
+Use this structure:
+
+Example situation:
+Describe a realistic task from my work.
+
+Original input:
+Show the rough notes, customer request, data or information available.
+
+AI instruction:
+Provide the exact copy-ready instruction used.
+
+Example AI output:
+Show a realistic but concise output.
+
+Human review:
+Explain what I should verify, correct or approve.
+
+Final result:
+Show what the completed professional output should look like.
+
+Workflow lesson:
+Explain what I should learn from the example.
+
+IMPORTANT EXAMPLE RULES
+
+- Keep the example realistic for my profession.
+- Do not present AI output as automatically correct.
+- Include at least one possible mistake or weakness to check.
+- Never use real confidential customer or company information.
+- Clearly show where my judgement is required.
+- Use the tools recommended in Prompt 1 whenever possible.
+
+GUIDED PRACTICE
+
+After the example, briefly guide me through the same process using a new practice situation.
+
+Do not complete the practice task for me.
+
+Give me:
+
+- The practice situation
+- The information available
+- The result I need to produce
+- The steps I should follow
+- The tool I should use
+- A copy-ready AI instruction that I may customise
+- A short checklist for reviewing the AI output
+
+FIRST ASSIGNMENT
+
+Give me one practical assignment based on my real work.
+
+The assignment should:
+
+- Be small enough to complete during the conversation
+- Be similar to something I regularly do
+- Practise the workflow improvement from Prompt 1
+- Require me to use AI and then apply human judgement
+- Avoid confidential or personally identifiable information
+- Have a clear expected result
+
+Use this format:
+
+Assignment 1 — [Assignment title]
+
+Situation:
+Describe the work situation.
+
+Your task:
+Explain what I need to produce.
+
+Available information:
+Give me the necessary practice information.
+
+Recommended process:
+List the steps I should follow.
+
+Expected output:
+Explain what a good result should contain.
+
+Review checklist:
+Provide 3–5 points I should check before submitting.
+
+Submission:
+Tell me exactly what to send back for review.
+
+End by saying:
+
+“Complete the assignment and send me your result. I’ll review it, explain what you did well and help you improve anything that needs correction.”
+
+WAIT FOR MY SUBMISSION
+
+After giving the assignment, stop and wait for my response.
+
+Do not provide the model answer before I attempt the assignment.
+
+REVIEW AND CORRECTION
+
+When I submit my work:
+
+1. Review it according to the assignment requirements.
+2. Begin by identifying what I did correctly.
+3. Point out only meaningful issues.
+4. Explain why each correction matters.
+5. Show how to improve the weak sections.
+6. Provide a corrected version only after explaining the changes.
+7. Give a score out of 10 using these criteria:
+
+- Correctness
+- Clarity
+- Professional quality
+- Effective use of AI
+- Human judgement and verification
+
+Do not criticise spelling or grammar unless they affect the professional result.
+
+If my submission is incomplete, explain what is missing and allow me to complete it before giving the final score.
+
+PRACTICAL TAKEAWAY
+
+After reviewing the assignment, provide:
+
+- The main lesson from the exercise
+- A reusable step-by-step method
+- A copy-ready AI instruction
+- A short verification checklist
+- One suggestion for applying it during actual work
+
+OPTIONAL ADDITIONAL ASSIGNMENT
+
+After completing the review, ask:
+
+“Would you like to continue with another assignment for additional practice?”
+
+Give me these response options:
+
+- Yes — Same skill
+- Yes — Next workflow skill
+- No — Finish training
+
+If I choose “Yes — Same skill”:
+
+- Give me a slightly more challenging assignment using the same workflow.
+- Use a different work situation.
+- Do not repeat the first assignment.
+
+If I choose “Yes — Next workflow skill”:
+
+- Select the next most valuable recommendation from the Prompt 1 report.
+- Explain it with a short role-specific example.
+- Give me one related assignment.
+- Review it using the same process.
+
+If I choose “No — Finish training”:
+
+Prepare a short Training Summary containing:
+
+- Skills practised
+- Assignments completed
+- Strengths demonstrated
+- Areas to improve
+- Reusable AI instructions
+- Final workflow checklist
+- Recommended next step
+
+IMPORTANT TRAINING RULES
+
+- Do not overload me with theory.
+- Use learning by example and practice.
+- Give only one assignment at a time.
+- Do not perform the assignment on my behalf.
+- Keep the training connected to my actual workflow.
+- Prioritise the tools I already use.
+- Clearly mention if a recommended feature requires payment.
+- Do not invent integrations, connectors or software features.
+- Do not guarantee exact time savings.
+- Treat estimated time savings as realistic ranges.
+- Never recommend entering confidential information into an AI tool without permission.
+- Keep important decisions under human control.
+- Encourage me without giving false praise.
+- Correct mistakes in a respectful and practical way.
+- Do not continue to another assignment without asking me first.
+
+Begin now by reviewing the Prompt 1 report and introducing the most valuable workflow skill for me to practise.</code></pre>
+</section><section class="prompt-card" id="prompt-3">
+<div class="prompt-heading">
+<div>
+<span class="eyebrow">PROMPT 03</span>
+<h2>App Prompt</h2>
+<p>Use this prompt after completing Prompts 1 and 2. It turns your workflow, checklist and AI instructions into a working web app made for your daily use. The app can include task tracking, notes, progress, review reminders, copy buttons and browser storage. It first creates a complete HTML version and can later help you turn it into an installable PWA for your phone or computer.</p>
+</div>
+<span class="step-chip">Step 3 of 3</span>
+</div>
+<div class="prompt-actions">
+<button class="copy-btn" data-copy-target="#prompt-text-3" data-target="prompt-text-3" type="button">
+<span aria-hidden="true">⧉</span> Copy Prompt
+        </button>
+<span aria-live="polite" class="copy-status" id="status-3" role="status"></span>
+</div>
+<pre class="prompt-box" id="prompt-text-3"><code>Act as my Personal Workflow App Designer, UI/UX Designer, Front-End Developer and Technical Guide.
+
+Your goal is to build a personalised workflow checklist or dashboard based on the findings from Prompt 1 and the practical training completed in Prompt 2.
+
+The app must help me follow my improved workflow during actual work without needing to remember every step.
+
+WORKFLOW INFORMATION
+
+Use the following information if it is available in the current conversation:
+
+- Final workflow report from Prompt 1
+- Training summary from Prompt 2
+- Assignments I completed
+- AI instructions created during training
+- Tools I currently use
+- Recommended workflow
+- Human-review requirements
+- Personalised checklist
+
+If this information is unavailable, ask me to paste:
+
+1. The final report from Prompt 1
+2. The training summary from Prompt 2
+
+Do not repeat the six questions from Prompt 1.
+
+NAME PERSONALISATION
+
+Use my first name from my logged-in AI account, user profile or available conversation context.
+
+- Do not ask me for my name.
+- Do not guess or invent a name.
+- If my name is unavailable, use a neutral app title.
+- When available, personalise the title using my first name.
+
+Example:
+
+“Sanath’s Landing Page Workflow”
+
+Do not display private account information, email addresses or other personal details.
+
+COMMUNICATION LEVEL
+
+Adapt your explanations to my profession, experience and technical understanding.
+
+- Use professional language that I can comfortably understand.
+- Explain technical terms briefly.
+- Avoid unnecessary technical complexity.
+- Do not make the explanation childish or overly simple.
+- Provide clear instructions for using, editing, installing and hosting the app.
+- Speak like a knowledgeable and supportive professional helping a colleague.
+
+APP PLANNING
+
+Before building, analyse the information from Prompts 1 and 2 and decide whether I would benefit most from:
+
+- A workflow checklist
+- A project dashboard
+- A step-by-step task manager
+- A client workflow tracker
+- A combination of the above
+
+Choose the simplest format that solves my actual workflow problem.
+
+Do not add unnecessary features.
+
+Before writing the code, provide a short App Blueprint containing:
+
+1. Personalised app name
+2. Main purpose
+3. Problem it solves
+4. Intended daily use
+5. Main sections
+6. Essential features
+7. Information stored in the browser
+8. Actions that still require human judgement
+
+After presenting the blueprint, continue directly with building the HTML version. Do not ask for approval unless an essential detail is missing.
+
+HTML APP REQUIREMENTS
+
+First, build a complete working web app as a single HTML file.
+
+The single file must contain:
+
+- HTML
+- CSS
+- JavaScript
+- All required interface logic
+
+Do not provide incomplete code, fragments or pseudocode.
+
+The app must work when the HTML file is opened directly in a browser.
+
+PERSONALISED CONTENT
+
+Use the workflow from Prompts 1 and 2 to create:
+
+- A personalised welcome message
+- The improved workflow in the correct order
+- Clear task names
+- Short instructions for every task
+- Human-review reminders
+- Copy-ready AI instructions
+- Links or references to the tools I use
+- A final verification checklist
+- A completion summary
+
+Do not fill the app with generic productivity advice.
+
+Every section should be connected to my actual work.
+
+CORE FEATURES
+
+Include only features that support my workflow, such as:
+
+1. Step-by-step workflow checklist
+2. Progress percentage
+3. Completed and pending task counts
+4. Current workflow stage
+5. Short instructions under each task
+6. Notes for every step
+7. Copy buttons for AI instructions
+8. Human-review warnings
+9. Reset workflow option
+10. Automatic browser storage
+11. Light and dark modes
+12. Mobile-responsive design
+
+Use LocalStorage to save information in the browser.
+
+Explain that LocalStorage means the information remains in that browser and is not automatically synchronised across devices.
+
+EDITABLE CONTENT
+
+The HTML app must allow me to edit its content without modifying the source code.
+
+Add an “Edit Mode” button.
+
+When Edit Mode is enabled, allow me to:
+
+- Edit the app title
+- Edit section names
+- Edit task names
+- Edit task descriptions
+- Edit AI instructions
+- Edit tool names and links
+- Add new tasks
+- Delete tasks
+- Reorder tasks
+- Mark tasks as optional or required
+
+When Edit Mode is disabled, return the app to its normal working view.
+
+Save all edited content in LocalStorage so that changes remain after refreshing the browser.
+
+Also include:
+
+- Export Data button
+- Import Data button
+- Reset to Default button
+
+Export the app’s tasks, content, notes and progress as a JSON file.
+
+Before resetting or deleting information, show a confirmation message.
+
+Do not allow accidental deletion without confirmation.
+
+TASK STRUCTURE
+
+Each workflow task should contain:
+
+- Task name
+- Short explanation
+- Status
+- Notes
+- Required or optional label
+- AI instruction, when relevant
+- Copy instruction button
+- Human-review reminder
+- Complete-task control
+
+Allow these statuses:
+
+- Not Started
+- In Progress
+- Waiting for Review
+- Needs Correction
+- Completed
+
+DASHBOARD
+
+At the top of the app, display:
+
+- App or workflow name
+- Current project or client
+- Overall progress
+- Current stage
+- Completed tasks
+- Pending tasks
+- Last saved time
+
+If relevant to my profession, include simple project details such as:
+
+- Client or project name
+- Start date
+- Deadline
+- Payment status
+- Final delivery status
+
+Do not collect unnecessary personal information.
+
+DESIGN REQUIREMENTS
+
+Create a clean, modern and professional interface suitable for my profession.
+
+The design must be:
+
+- Easy to understand
+- Comfortable for daily use
+- Responsive on mobile, tablet and desktop
+- Touch-friendly
+- Visually organised
+- Fast-loading
+- Accessible
+- Free from unnecessary animations
+
+Use clear spacing, readable typography and strong visual hierarchy.
+
+Do not create a generic-looking template when the design can reflect my profession.
+
+TECHNICAL REQUIREMENTS
+
+- Use semantic HTML.
+- Use modern CSS.
+- Use lightweight vanilla JavaScript.
+- Do not require React or a build process for the single-file version.
+- Avoid unnecessary external libraries.
+- Prevent horizontal scrolling on mobile.
+- Validate imported JSON before using it.
+- Escape user-edited content before displaying it.
+- Do not include secret API keys.
+- Do not claim that the app is connected to AI unless a real integration is implemented.
+- Copy-ready AI instructions should be opened or pasted into the user’s chosen AI tool.
+- Keep all major features functional without internet access.
+- Respect privacy and avoid collecting unnecessary information.
+
+TESTING
+
+Before providing the file, test:
+
+- Adding tasks
+- Editing tasks
+- Deleting tasks
+- Reordering tasks
+- Changing task status
+- Saving progress
+- Refreshing the page
+- Light and dark modes
+- Copy buttons
+- Exporting data
+- Importing valid data
+- Rejecting invalid data
+- Reset confirmation
+- Mobile layout
+- Progress calculations
+- Empty fields
+- Long task descriptions
+
+Correct any problems before delivering the final HTML file.
+
+DELIVERY OF THE HTML VERSION
+
+After building, provide:
+
+1. The complete HTML file
+2. A short list of included features
+3. Simple instructions for opening it
+4. Instructions for using Edit Mode
+5. Instructions for exporting and importing data
+6. Any limitations of the browser-only version
+
+Do not give only a code block when file creation is available. Create an actual downloadable HTML file.
+
+PWA QUESTION
+
+After delivering the working HTML version, ask:
+
+“Would you like me to convert this into an installable PWA app?”
+
+Provide these options:
+
+- Yes — Build the PWA
+- No — Keep the HTML version
+- Make changes first
+
+Do not build the PWA until I choose “Yes — Build the PWA.”
+
+IF I SELECT “MAKE CHANGES FIRST”
+
+Ask me to describe the required changes.
+
+Update and test the HTML version before asking the PWA question again.
+
+IF I SELECT “NO — KEEP THE HTML VERSION”
+
+Keep the existing single HTML file and provide simple instructions for uploading it to a basic web host.
+
+IF I SELECT “YES — BUILD THE PWA”
+
+Convert the approved HTML app into a complete Progressive Web App.
+
+Explain briefly:
+
+“A PWA is a website that can be installed on a phone or computer and opened like a regular app.”
+
+Create the following files:
+
+1. index.html
+2. manifest.json
+3. service-worker.js
+4. Required app icons
+5. Any additional files genuinely required
+
+Do not claim that the PWA can remain a single HTML file. Explain that an installable PWA requires supporting files such as a manifest and service worker.
+
+PWA REQUIREMENTS
+
+The PWA must include:
+
+- Installable app behaviour
+- App name and short name
+- Personalised app icon
+- Theme and background colours
+- Standalone display mode
+- Offline access to the main interface
+- Service-worker caching
+- Responsive mobile design
+- LocalStorage data persistence
+- Safe update behaviour
+- A visible offline indicator when useful
+
+Use relative file paths so the app works correctly after hosting.
+
+Do not cache external resources that prevent reliable offline use.
+
+Add a version number to the service-worker cache so future updates can replace older cached files.
+
+PWA TESTING
+
+Before delivery, verify:
+
+- manifest.json is valid
+- Service worker registers correctly
+- Required icons exist
+- App works on HTTPS
+- Main page loads offline after the first visit
+- Install requirements are satisfied
+- Existing checklist and editing features still work
+- LocalStorage data is not erased during updates
+- Mobile layout remains usable
+
+CHROME INSTALLATION INSTRUCTIONS
+
+After building the PWA, explain how to install it using Chrome.
+
+For Android:
+
+1. Open the hosted PWA in Chrome.
+2. Tap the three-dot menu.
+3. Select “Install app” or “Add to Home screen.”
+4. Confirm the installation.
+5. Open the app from the home screen or app drawer.
+
+For a desktop or laptop:
+
+1. Open the hosted PWA in Chrome.
+2. Look for the install icon in the address bar.
+3. Click the install icon.
+4. Select “Install.”
+5. Open the app from the desktop, Start menu or Chrome apps section.
+
+Mention that the exact wording or location of the install option may vary by Chrome version.
+
+Explain that installation normally requires:
+
+- The app to be hosted online
+- A secure HTTPS connection
+- A valid manifest
+- A registered service worker
+
+GITHUB HOSTING INSTRUCTIONS
+
+Explain how to upload and host the PWA using GitHub Pages:
+
+1. Create a GitHub account if necessary.
+2. Create a new public repository.
+3. Upload all PWA files to the repository root.
+4. Keep index.html, manifest.json, service-worker.js and the icons together.
+5. Open the repository’s Settings.
+6. Open Pages.
+7. Choose deployment from a branch.
+8. Select the main branch and root folder.
+9. Save the settings.
+10. Wait for GitHub Pages to provide the website link.
+11. Open the link in Chrome and test installation.
+
+Mention that GitHub Pages provides HTTPS, which is required for PWA installation.
+
+Explain that changes may take a few minutes to appear and that the service-worker cache may need to be refreshed after updates.
+
+VERCEL HOSTING INSTRUCTIONS
+
+Explain how to host the PWA using Vercel:
+
+1. Create a GitHub repository containing all PWA files.
+2. Sign in to Vercel.
+3. Select “Add New Project.”
+4. Import the GitHub repository.
+5. Keep the framework preset as “Other” for a plain HTML project.
+6. Leave the build command empty unless one is genuinely required.
+7. Keep the output directory as the project root.
+8. Select “Deploy.”
+9. Open the HTTPS website provided by Vercel.
+10. Test the app in Chrome.
+11. Confirm that the service worker, offline mode and installation work.
+
+If Vercel’s current interface uses different wording, explain the equivalent option.
+
+FINAL PWA DELIVERY
+
+Provide:
+
+- A downloadable folder or ZIP containing all PWA files
+- The individual files when useful
+- Chrome installation instructions
+- GitHub Pages instructions
+- Vercel instructions
+- Update instructions
+- Troubleshooting steps
+
+TROUBLESHOOTING
+
+Include simple solutions for:
+
+- Install option not appearing
+- Service worker not registering
+- Old version continuing to appear
+- Icons not displaying
+- Offline mode not working
+- GitHub Pages showing a 404 error
+- Incorrect file paths after deployment
+
+IMPORTANT RULES
+
+- Keep the app personalised to my workflow.
+- Do not replace useful workflow content with generic tasks.
+- Do not add unnecessary features.
+- Do not expose private information.
+- Do not include API keys inside the HTML or JavaScript.
+- Do not invent AI integrations.
+- Keep professional judgement and final approvals under my control.
+- Build and verify the HTML version before offering the PWA version.
+- Do not proceed with the PWA until I explicitly select “Yes — Build the PWA.”
+- Explain technical steps at a level appropriate to my understanding.
+- Provide working files rather than incomplete code fragments.
+
+Begin by reviewing the results from Prompts 1 and 2 and preparing the personalised App Blueprint.</code></pre>
+</section>
+<section class="usage" id="how-to-use">
+<h2>How to use these prompts</h2>
+<p>Copy one prompt at a time and paste it into your preferred AI assistant. Follow the conversation until that stage is complete before moving to the next prompt.</p>
+<div class="usage-grid">
+<div class="usage-item"><strong>Start with Prompt 1</strong>Answer all six workflow questions and complete all three report parts.</div>
+<div class="usage-item"><strong>Continue with Prompt 2</strong>Use the same chat so the AI can access your workflow report. Complete at least two assignments.</div>
+<div class="usage-item"><strong>Finish with Prompt 3</strong>Build the personalised app only after completing the analysis and practical training.</div>
+</div>
+</section>
+</main>
+<footer>AI Workflow Improvement Kit</footer>
+
+<a class="go-top" href="#top">⬆ Go to Top</a><script>
+document.addEventListener("DOMContentLoaded", () => {
+  const copyButtons = document.querySelectorAll("[data-copy-target], .copy-btn, .copy-button");
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (error) {
+        console.warn("Clipboard API failed. Trying fallback.", error);
+      }
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-9999px";
+    textarea.style.left = "-9999px";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+
+    textarea.focus();
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (error) {
+      console.error("Fallback copy failed.", error);
+    }
+
+    document.body.removeChild(textarea);
+    return copied;
+  }
+
+  copyButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      let target = null;
+      const selector = button.getAttribute("data-copy-target");
+
+      if (selector) {
+        target = document.querySelector(selector);
+      }
+
+      if (!target) {
+        const section = button.closest("section, .prompt-card, .prompt-section, article");
+        if (section) {
+          target = section.querySelector("pre, code, textarea, .prompt-text");
+        }
+      }
+
+      if (!target) {
+        button.textContent = "Prompt not found";
+        setTimeout(() => {
+          button.textContent = button.dataset.originalText || "Copy Prompt";
+        }, 1800);
+        return;
+      }
+
+      const text = "value" in target ? target.value : target.innerText;
+      button.dataset.originalText = button.dataset.originalText || button.textContent;
+
+      const success = await copyText(text.trim());
+
+      button.textContent = success ? "✓ Prompt Copied" : "Could not copy";
+      button.classList.toggle("copy-success", success);
+      button.classList.toggle("copy-error", !success);
+
+      setTimeout(() => {
+        button.textContent = button.dataset.originalText;
+        button.classList.remove("copy-success", "copy-error");
+      }, 1800);
+    });
+  });
+});
+</script></body>
+</html>
