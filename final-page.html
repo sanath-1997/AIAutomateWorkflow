@@ -1,167 +1,129 @@
 <!DOCTYPE html>
-
-<html lang="en">
-<head><script>(function(){const v=localStorage.getItem('paymentsucess');if(v!=='45'){window.location.replace('https://ai-automate-workflow.vercel.app/');return;}document.documentElement.style.visibility='visible';})();</script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="Three practical AI workflow prompts for analysis, training and app creation." name="description"/>
+<html lang="en" style="visibility:hidden">
+<head>
+<script>
+(function(){
+  const value = localStorage.getItem('paymentsucess');
+  if(value !== '45'){
+    window.location.replace('https://ai-automate-workflow.vercel.app/');
+    return;
+  }
+  document.documentElement.style.visibility = 'visible';
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Three simple AI workflow prompts for analysis, practical training and app creation.">
 <title>AI Workflow Improvement Kit</title>
 <style>
-    :root {
-      --bg:#f5f7fb; --surface:#ffffff; --surface-soft:#eef2ff; --text:#172033;
-      --muted:#667085; --line:#dfe5ef; --brand:#5b5ce2; --brand-dark:#4445bd;
-      --success:#13795b; --shadow:0 18px 55px rgba(24,39,75,.10);
-    }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:linear-gradient(180deg,#eef1ff 0,#f7f8fc 430px); color:var(--text); line-height:1.65; }
-    button,a { -webkit-tap-highlight-color:transparent; }
-    .container { width:min(1100px, calc(100% - 32px)); margin:auto; }
-    .hero { padding:72px 0 42px; }
-    .hero-grid { display:grid; grid-template-columns:1.35fr .65fr; gap:28px; align-items:stretch; }
-    .hero-copy,.side-card { background:rgba(255,255,255,.86); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.9); border-radius:28px; box-shadow:var(--shadow); }
-    .hero-copy { padding:42px; }
-    .kicker { display:inline-flex; align-items:center; gap:8px; padding:7px 12px; border-radius:999px; background:var(--surface-soft); color:var(--brand-dark); font-weight:800; font-size:.78rem; letter-spacing:.08em; }
-    h1 { font-size:clamp(2.3rem,6vw,4.7rem); line-height:1.02; letter-spacing:-.055em; margin:20px 0; max-width:850px; }
-    .lead { font-size:1.12rem; color:var(--muted); max-width:760px; margin:0; }
-    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
-    .primary-link,.secondary-link { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0 18px; border-radius:14px; font-weight:800; text-decoration:none; }
-    .primary-link { background:var(--brand); color:#fff; } .primary-link:hover { background:var(--brand-dark); }
-    .secondary-link { color:var(--text); border:1px solid var(--line); background:#fff; }
-    .side-card { padding:28px; display:flex; flex-direction:column; justify-content:space-between; }
-    .side-card h3 { margin:0 0 12px; font-size:1.15rem; }
-    .side-card p { color:var(--muted); margin:0; }
-    .mini-steps { display:grid; gap:12px; margin-top:24px; }
-    .mini-step { display:flex; gap:12px; align-items:flex-start; padding:13px; background:#fff; border:1px solid var(--line); border-radius:15px; }
-    .mini-step b { display:grid; place-items:center; min-width:29px; height:29px; border-radius:9px; background:var(--surface-soft); color:var(--brand-dark); }
-    .notice { margin:0 auto 28px; background:#fff8e7; border:1px solid #f0ddb0; border-radius:18px; padding:18px 20px; color:#624c16; }
-    .notice strong { color:#3f310d; }
-    .prompt-nav { display:flex; flex-wrap:wrap; gap:10px; padding-bottom:24px; }
-    .prompt-nav a { text-decoration:none; color:var(--brand-dark); background:#fff; border:1px solid var(--line); padding:10px 14px; border-radius:999px; font-weight:750; }
-    main { padding-bottom:70px; }
-    .prompt-card { background:var(--surface); border:1px solid var(--line); border-radius:26px; box-shadow:0 12px 34px rgba(24,39,75,.07); padding:30px; margin:0 0 26px; scroll-margin-top:18px; }
-    .prompt-heading { display:flex; justify-content:space-between; gap:24px; align-items:flex-start; }
-    .eyebrow { display:block; font-weight:900; letter-spacing:.12em; color:var(--brand); font-size:.75rem; }
-    h2 { font-size:clamp(1.65rem,4vw,2.35rem); line-height:1.15; letter-spacing:-.03em; margin:7px 0 8px; }
-    .prompt-heading p { margin:0; color:var(--muted); max-width:760px; }
-    .step-chip { white-space:nowrap; background:var(--surface-soft); color:var(--brand-dark); font-weight:800; padding:8px 12px; border-radius:12px; font-size:.82rem; }
-    .prompt-actions { display:flex; align-items:center; gap:12px; margin:25px 0 12px; min-height:46px; }
-    .copy-btn { border:0; background:var(--brand); color:#fff; padding:12px 18px; border-radius:13px; font:inherit; font-weight:850; cursor:pointer; box-shadow:0 8px 18px rgba(91,92,226,.24); }
-    .copy-btn:hover { background:var(--brand-dark); transform:translateY(-1px); }
-    .copy-btn:focus-visible { outline:3px solid rgba(91,92,226,.25); outline-offset:3px; }
-    .copy-status { color:var(--success); font-weight:800; font-size:.92rem; }
-    .prompt-box { margin:0; max-height:650px; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; background:#101522; color:#e8ecf4; border-radius:18px; padding:24px; font:500 .91rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size:2; }
-    .usage { background:#171b2d; color:#fff; border-radius:26px; padding:32px; margin-top:26px; }
-    .usage h2 { margin-top:0; } .usage p { color:#c9cfdb; }
-    .usage-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px; }
-    .usage-item { border:1px solid rgba(255,255,255,.13); border-radius:17px; padding:18px; }
-    .usage-item strong { display:block; color:#fff; margin-bottom:5px; }
-    footer { text-align:center; color:var(--muted); padding:24px 16px 46px; }
-    @media (max-width:820px) {
-      .hero { padding-top:30px; } .hero-grid { grid-template-columns:1fr; } .hero-copy { padding:28px; }
-      .prompt-heading { display:block; } .step-chip { display:inline-block; margin-top:16px; } .usage-grid { grid-template-columns:1fr; }
-    }
-    @media (max-width:520px) {
-      .container { width:min(100% - 20px,1100px); } h1 { font-size:2.35rem; }
-      .hero-copy,.side-card,.prompt-card,.usage { border-radius:20px; } .prompt-card { padding:20px; }
-      .prompt-box { padding:17px; font-size:.82rem; max-height:560px; } .prompt-actions { align-items:flex-start; flex-direction:column; gap:7px; }
-      .copy-btn { width:100%; }
-    }
-  
-.go-top{
-display:block;
-width:220px;
-margin:40px auto 20px;
-padding:14px 20px;
-text-align:center;
-text-decoration:none;
-font-weight:700;
-border-radius:12px;
-background:#2563eb;
-color:#fff;
+:root {
+  --bg:#f5f7fb; --surface:#fff; --soft:#eef2ff; --text:#172033;
+  --muted:#667085; --line:#dfe5ef; --brand:#5b5ce2; --brand-dark:#4445bd;
+  --success:#15803d; --danger:#b91c1c; --shadow:0 18px 55px rgba(24,39,75,.10);
 }
-.go-top:hover{opacity:.9}
-
-.copy-success { background: #15803d !important; color: #fff !important; }
-.copy-error { background: #b91c1c !important; color: #fff !important; }
-html{visibility:hidden;}
-.main-instruction{
-  max-width:1100px;
-  margin:24px auto 32px;
-  padding:24px 28px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#eef2ff,#f8fafc);
-  border:1px solid rgba(37,99,235,.18);
-  box-shadow:0 12px 30px rgba(15,23,42,.08);
-}
-.main-instruction h2{
-  margin:0;
-  text-align:center;
-  font-size:clamp(1.3rem, 2.5vw, 2rem);
-  line-height:1.25;
-  font-weight:800;
-  letter-spacing:-0.02em;
-}
-@media (max-width:640px){
-  .main-instruction{
-    margin:18px 14px 24px;
-    padding:20px 16px;
-  }
-}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(180deg,#eef1ff 0,#f7f8fc 430px);color:var(--text);line-height:1.65}
+.container{width:min(1100px,calc(100% - 32px));margin:auto}
+.hero{padding:64px 0 34px}
+.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:28px}
+.hero-copy,.side-card{background:rgba(255,255,255,.9);border:1px solid #fff;border-radius:28px;box-shadow:var(--shadow)}
+.hero-copy{padding:42px}
+.side-card{padding:28px}
+.kicker{display:inline-block;padding:7px 12px;border-radius:999px;background:var(--soft);color:var(--brand-dark);font-weight:800;font-size:.78rem;letter-spacing:.08em}
+h1{font-size:clamp(2.3rem,6vw,4.7rem);line-height:1.02;letter-spacing:-.055em;margin:20px 0}
+.lead,.side-card p,.prompt-heading p{color:var(--muted)}
+.hero-actions,.prompt-nav,.prompt-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-actions{margin-top:28px}
+.primary-link,.secondary-link,.prompt-nav a,.go-top{text-decoration:none;font-weight:800;border-radius:14px}
+.primary-link{background:var(--brand);color:#fff;padding:13px 18px}
+.secondary-link{background:#fff;color:var(--text);border:1px solid var(--line);padding:13px 18px}
+.mini-steps{display:grid;gap:12px;margin-top:22px}
+.mini-step{display:flex;gap:12px;padding:13px;background:#fff;border:1px solid var(--line);border-radius:15px}
+.mini-step b{display:grid;place-items:center;min-width:29px;height:29px;border-radius:9px;background:var(--soft);color:var(--brand-dark)}
+.main-instruction{max-width:1100px;margin:20px auto 30px;padding:23px;border-radius:18px;background:linear-gradient(135deg,#eef2ff,#fff);border:1px solid rgba(37,99,235,.18);box-shadow:0 12px 30px rgba(15,23,42,.08)}
+.main-instruction h2{margin:0;text-align:center;font-size:clamp(1.55rem,4vw,2.7rem);line-height:1.25}
+.notice{margin-bottom:25px;background:#fff8e7;border:1px solid #f0ddb0;border-radius:18px;padding:18px 20px;color:#624c16}
+.prompt-nav{padding-bottom:24px}
+.prompt-nav a{color:var(--brand-dark);background:#fff;border:1px solid var(--line);padding:10px 14px;border-radius:999px}
+.prompt-card{background:var(--surface);border:1px solid var(--line);border-radius:26px;box-shadow:0 12px 34px rgba(24,39,75,.07);padding:30px;margin-bottom:26px;scroll-margin-top:18px}
+.prompt-heading{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.eyebrow{display:block;font-weight:900;letter-spacing:.12em;color:var(--brand);font-size:.75rem}
+h2{font-size:clamp(1.65rem,4vw,2.35rem);line-height:1.15;letter-spacing:-.03em;margin:7px 0 8px}
+.step-chip{white-space:nowrap;background:var(--soft);color:var(--brand-dark);font-weight:800;padding:8px 12px;border-radius:12px;font-size:.82rem}
+.prompt-actions{align-items:center;margin:24px 0 12px}
+.copy-btn{border:0;background:var(--brand);color:#fff;padding:12px 18px;border-radius:13px;font:inherit;font-weight:850;cursor:pointer}
+.copy-btn.success{background:var(--success)}
+.copy-btn.error{background:var(--danger)}
+.copy-status{font-weight:800;color:var(--success)}
+.prompt-box{margin:0;max-height:650px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#101522;color:#e8ecf4;border-radius:18px;padding:24px;font:500 .91rem/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.usage{background:#171b2d;color:#fff;border-radius:26px;padding:32px;margin-top:26px}
+.usage p{color:#c9cfdb}
+.usage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.usage-item{border:1px solid rgba(255,255,255,.13);border-radius:17px;padding:18px}
+.usage-item strong{display:block;margin-bottom:5px}
+.go-top{display:block;width:220px;margin:40px auto 20px;padding:14px 20px;text-align:center;background:#2563eb;color:#fff}
+footer{text-align:center;color:var(--muted);padding:22px 16px 42px}
+@media(max-width:820px){.hero{padding-top:28px}.hero-grid{grid-template-columns:1fr}.prompt-heading{display:block}.step-chip{display:inline-block;margin-top:14px}.usage-grid{grid-template-columns:1fr}}
+@media(max-width:520px){.container{width:min(100% - 20px,1100px)}h1{font-size:2.35rem}.hero-copy,.side-card,.prompt-card,.usage{border-radius:20px}.hero-copy,.prompt-card{padding:20px}.prompt-box{padding:17px;font-size:.82rem;max-height:560px}.prompt-actions{align-items:stretch;flex-direction:column}.copy-btn{width:100%}.main-instruction{margin:16px 10px 24px;padding:18px 14px}}
 </style>
 </head>
 <body id="top">
 <header class="hero">
-<div class="container hero-grid">
-<section class="hero-copy">
-<span class="kicker">AI WORKFLOW COURSE</span>
-<h1>Work smarter without compromising quality.</h1>
-<p class="lead">You work long hours because you care about doing things well. These three prompts help you diagnose your workflow, practise improvements, and build a personalised workflow app.</p>
-<div class="hero-actions">
-<a class="primary-link" href="#prompt-1">Begin with Prompt 1</a>
-<a class="secondary-link" href="#how-to-use">How it works</a>
-</div>
+  <div class="container hero-grid">
+    <section class="hero-copy">
+      <span class="kicker">AI WORKFLOW COURSE</span>
+      <h1>Work smarter without compromising quality.</h1>
+      <p class="lead">These three prompts help you understand your workflow, practise one useful improvement and build a simple app for daily use.</p>
+      <div class="hero-actions">
+        <a class="primary-link" href="#prompt-1">Begin with Prompt 1</a>
+        <a class="secondary-link" href="#how-to-use">How it works</a>
+      </div>
+    </section>
+    <aside class="side-card">
+      <h3>Your three-step workflow</h3>
+      <p>Use all three prompts in order and keep them in the same AI chat.</p>
+      <div class="mini-steps">
+        <div class="mini-step"><b>1</b><span><strong>Analyse</strong><br>Find what slows you down.</span></div>
+        <div class="mini-step"><b>2</b><span><strong>Practise</strong><br>Learn through an example and assignment.</span></div>
+        <div class="mini-step"><b>3</b><span><strong>Build</strong><br>Create a simple workflow app.</span></div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<section class="main-instruction">
+  <h2>Copy the following prompts and execute them in any AI model of your choice. Make sure all prompts are used in a single chat.</h2>
 </section>
-<aside class="side-card">
-<div>
-<h3>Your three-step workflow</h3>
-<p>Use each prompt in order. Keep Prompts 1 and 2 in the same AI chat.</p>
-</div>
-<div class="mini-steps">
-<div class="mini-step"><b>1</b><span><strong>Analyse</strong><br/>Find what is slowing you down.</span></div>
-<div class="mini-step"><b>2</b><span><strong>Practise</strong><br/>Train through examples and assignments.</span></div>
-<div class="mini-step"><b>3</b><span><strong>Build</strong><br/>Create your personalised workflow app.</span></div>
-</div>
-</aside>
-</div>
-</header><section class="main-instruction"><h2>Copy the following prompts and execute them in any AI model of your choice. Make sure all prompts are used in a single chat.</h2></section>
+
 <main class="container">
-<div class="notice"><strong>Before you begin:</strong> Read the instructions before running each prompt. The prompts are detailed so the AI can guide you correctly, but you only need to answer or act on one small step at a time.</div>
-<nav aria-label="Prompt navigation" class="prompt-nav">
-<a href="#prompt-1">Prompt 1: Briefing</a><a href="#prompt-2">Prompt 2: Training</a><a href="#prompt-3">Prompt 3: App</a>
-</nav>
-<section class="prompt-card" id="prompt-1">
-<div class="prompt-heading">
-<div>
-<span class="eyebrow">PROMPT 01</span>
-<h2>Briefing Prompt</h2>
-<p>Start with this prompt to understand how you currently work. It asks six short questions based on your job, tasks, tools and main difficulties. From your answers, it finds the part of your workflow that takes the most time and prepares a simple three-part report. The report shows what is slowing you down, which work is repeated, what still needs your judgement, and where AI or automation may help you save time without lowering quality.</p>
-</div>
-<span class="step-chip">Step 1 of 3</span>
-</div>
-<div class="prompt-actions">
-<button class="copy-btn" data-copy-target="#prompt-text-1" data-target="prompt-text-1" type="button">
-<span aria-hidden="true">⧉</span> Copy Prompt
-        </button>
-<span aria-live="polite" class="copy-status" id="status-1" role="status"></span>
-</div>
-<pre class="prompt-box" id="prompt-text-1"><code># AI Workflow Analysis Prompt
+  <div class="notice"><strong>Before you begin:</strong> Use one prompt at a time. Complete each stage before moving to the next prompt.</div>
+  <nav class="prompt-nav" aria-label="Prompt navigation">
+    <a href="#prompt-1">Prompt 1: Analysis</a>
+    <a href="#prompt-2">Prompt 2: Training</a>
+    <a href="#prompt-3">Prompt 3: App</a>
+  </nav>
+
+  <section class="prompt-card" id="prompt-1">
+    <div class="prompt-heading">
+      <div>
+        <span class="eyebrow">PROMPT 01</span>
+        <h2>Workflow Analysis Prompt</h2>
+        <p>Answer six short questions and receive a brief three-part report showing delays, improvement opportunities and a practical action plan.</p>
+      </div>
+      <span class="step-chip">Step 1 of 3</span>
+    </div>
+    <div class="prompt-actions">
+      <button class="copy-btn" type="button" data-target="prompt-text-1">⧉ Copy Prompt</button>
+      <span class="copy-status" id="status-1" aria-live="polite"></span>
+    </div>
+    <pre class="prompt-box" id="prompt-text-1"><code># AI Workflow Analysis Prompt
 
 Act as my AI Workflow Analyst, Productivity Consultant and Automation Advisor.
 
 Your goal is to understand how I currently work, identify the specific parts of my workflow that are slowing me down, and explain how AI, automation and tool connections can reduce my workload.
 
-Assume I may not have technical knowledge. Use moderate, simple English while including relevant professional terms. Briefly explain any unfamiliar technical term when it first appears.
+Assume I may not have technical knowledge. Use moderate, simple English while including relevant professional terms. Briefly explain unfamiliar technical terms when they first appear.
 
 ---
 
@@ -169,10 +131,12 @@ Assume I may not have technical knowledge. Use moderate, simple English while in
 
 Use my first name from my logged-in AI account, user profile or available conversation context.
 
-* Do not ask for my name.
-* Do not guess or invent a name.
-* If my name is unavailable, use “Hi there.”
-* Use my name naturally without repeating it unnecessarily.
+- Do not ask for my name.
+- Do not guess or invent a name.
+- If my name is unavailable, begin with “Hi there.”
+- Mention my name only once, in the opening introduction.
+- After the opening introduction, use “you” and “your.”
+- Do not mention my name again in the questions, initial briefing, report sections or conclusion.
 
 ---
 
@@ -182,34 +146,34 @@ Observe my job role, answers, vocabulary and technical understanding.
 
 Adapt all questions and explanations accordingly:
 
-* Use moderate, simple English.
-* Maintain a professional and respectful tone.
-* Do not make the language childish.
-* Avoid unnecessary technical jargon.
-* Use professional terms relevant to my work.
-* Explain an unfamiliar term in one short sentence.
-* Give enough information for me to take action without overwhelming me.
-* Communicate like a knowledgeable and supportive colleague.
-* Never speak down to me or question my professional ability.
+- Use moderate, simple English.
+- Maintain a professional and respectful tone.
+- Do not make the language childish.
+- Avoid unnecessary technical jargon.
+- Use professional terms relevant to my work.
+- Explain an unfamiliar term in one short sentence.
+- Give enough information for me to take action without overwhelming me.
+- Communicate like a knowledgeable and supportive colleague.
+- Never speak down to me or question my professional ability.
 
 ---
 
 ## Question Rules
 
-* Ask exactly 6 questions.
-* Ask only one question at a time.
-* Number them exactly as `1/6`, `2/6`, `3/6`, etc.
-* Wait for my answer before asking the next question.
-* Only Question 1/6 is fixed.
-* Questions 2/6 to 6/6 must be based on my previous answers.
-* Each question must show that you understood what I previously shared.
-* Keep questions specific and moderately detailed.
-* Do not ask multiple questions under one number.
-* Do not repeat information I have already provided.
-* My answer should normally be one word or one sentence.
-* Allow a short explanation only when genuinely necessary.
-* Do not ask any questions after Question 6/6.
-* Do not ask clarification questions after the assessment.
+- Ask exactly 6 questions.
+- Ask only one question at a time.
+- Number them exactly as 1/6, 2/6, 3/6, etc.
+- Wait for my answer before asking the next question.
+- Only Question 1/6 is fixed.
+- Questions 2/6 to 6/6 must be based on my previous answers.
+- Each question must show that you understood what I previously shared.
+- Keep questions specific and moderately detailed.
+- Do not ask multiple questions under one number.
+- Do not repeat information I have already provided.
+- My answer should normally be one word or one sentence.
+- Allow a short explanation only when genuinely necessary.
+- Do not ask any questions after Question 6/6.
+- Do not ask clarification questions after the assessment.
 
 ---
 
@@ -217,15 +181,17 @@ Adapt all questions and explanations accordingly:
 
 Start by saying:
 
-&gt; “Hi [First Name], I’ll ask you 6 short questions to understand your workflow. Please answer using one word or one sentence. You may provide a short explanation only when necessary.”
+“Hi [First Name], I’ll ask you 6 short questions to understand your workflow. Please answer using one word or one sentence. You may provide a short explanation only when necessary.”
 
 If my name is unavailable, say:
 
-&gt; “Hi there, I’ll ask you 6 short questions to understand your workflow. Please answer using one word or one sentence. You may provide a short explanation only when necessary.”
+“Hi there, I’ll ask you 6 short questions to understand your workflow. Please answer using one word or one sentence. You may provide a short explanation only when necessary.”
+
+This is the only place where my name should appear.
 
 Then ask:
 
-&gt; “1/6: What is your current job role?”
+“1/6: What is your current job role?”
 
 ---
 
@@ -235,10 +201,10 @@ After receiving my first answer, create Question 2/6 based on my specific job ro
 
 Examples:
 
-* For a web developer, ask about the main type of development work performed regularly.
-* For a sales executive, ask about the main sales activity handled regularly.
-* For a product manager, ask about the main product-management responsibility that takes up time.
-* For a specialised role, ask about the actual work normally performed in that profession.
+- For a web developer, ask about the main type of development work performed regularly.
+- For a sales executive, ask about the main sales activity handled regularly.
+- For a product manager, ask about the main product-management responsibility that takes up time.
+- For a specialised role, ask about the actual work normally performed in that profession.
 
 Use the following purpose for the remaining questions:
 
@@ -254,12 +220,12 @@ Identify the tools, applications, websites, AI models or software currently used
 
 Identify one important missing factor based on the previous answers, such as:
 
-* How frequently the task is performed
-* How long the task takes
-* Why revisions happen
-* Where information is transferred manually
-* Which approvals or people are involved
-* Where mistakes commonly occur
+- How frequently the task is performed
+- How long the task takes
+- Why revisions happen
+- Where information is transferred manually
+- Which approvals or people are involved
+- Where mistakes commonly occur
 
 Choose only one relevant factor. Do not combine multiple questions.
 
@@ -267,13 +233,13 @@ Choose only one relevant factor. Do not combine multiple questions.
 
 Identify the practical result I want, such as:
 
-* Reducing working time
-* Reducing revisions
-* Avoiding mistakes
-* Automating repetitive steps
-* Improving quality
-* Completing more work
-* Making the process easier to manage
+- Reducing working time
+- Reducing revisions
+- Avoiding mistakes
+- Automating repetitive steps
+- Improving quality
+- Completing more work
+- Making the process easier to manage
 
 These are guidelines, not fixed questions. Personalise Questions 2/6 to 6/6 according to my answers.
 
@@ -283,15 +249,15 @@ These are guidelines, not fixed questions. Personalise Questions 2/6 to 6/6 acco
 
 After receiving all 6 answers, prepare a brief initial assessment containing:
 
-* My job role
-* My main work
-* The step slowing me down
-* The tools I currently use
-* The likely cause of the delay
-* The result I want
-* Where AI or automation may help
+- My job role
+- My main work
+- The step slowing me down
+- The tools I currently use
+- The likely cause of the delay
+- The result I want
+- Where AI or automation may help
 
-Address me naturally by name and explain the findings in moderate, simple English with relevant professional terms.
+Use “you” and “your.” Do not mention my name.
 
 Clearly separate:
 
@@ -316,17 +282,18 @@ Do not provide all three parts at once.
 Follow this sequence:
 
 1. Present Part 1.
-2. End with: **“Type N for Part 2.”**
-3. Wait for me to type `N`.
+2. End with: **Type N for Part 2.**
+3. Wait for me to type N.
 4. Present Part 2.
-5. End with: **“Type N for Part 3.”**
-6. Wait for me to type `N`.
+5. End with: **Type N for Part 3.**
+6. Wait for me to type N.
 7. Present Part 3.
-8. End with a short personalised conclusion.
+8. End with a short conclusion.
 
-If I type anything other than `N`, briefly remind me to type `N` to continue.
+If I type anything other than N, briefly remind me to type N to continue.
 
 Do not repeat content from an earlier part.
+Do not mention my name in any report part or conclusion.
 
 ---
 
@@ -342,7 +309,7 @@ Include:
 
 End with:
 
-&gt; **Type N for Part 2.**
+**Type N for Part 2.**
 
 ---
 
@@ -358,15 +325,15 @@ Include:
 
 For each important recommendation, briefly explain:
 
-* What should change
-* Why it would help
-* Which tool or feature can support it
-* Whether human review is required
-* Any important cost, limitation or setup requirement
+- What should change
+- Why it would help
+- Which tool or feature can support it
+- Whether human review is required
+- Any important cost, limitation or setup requirement
 
 End with:
 
-&gt; **Type N for Part 3.**
+**Type N for Part 3.**
 
 ---
 
@@ -378,7 +345,7 @@ Include:
 2. Three Actions I Can Start Immediately
 3. Personalised Workflow Checklist
 4. Privacy and Human-Review Reminders
-5. Short Personalised Conclusion
+5. Short Conclusion
 
 The action plan must be practical enough to support further training in Prompt 2.
 
@@ -388,295 +355,562 @@ The action plan must be practical enough to support further training in Prompt 2
 
 The entire report must:
 
-* Be brief and focused.
-* Use moderate, simple English.
-* Include relevant professional terms.
-* Explain unfamiliar terms briefly.
-* Address me directly using “you” and “your.”
-* Match my profession and demonstrated understanding.
-* Use short paragraphs and clear bullet points.
-* Avoid overly technical or academic explanations.
-* Use examples connected to my actual work.
-* Make every recommendation practical and actionable.
-* Maintain a calm, respectful and encouraging tone.
-* Recognise the effort I am already making.
-* Explain workflow problems without blaming me.
-* Present recommendations as helpful options, not strict instructions.
-* Remind me that AI supports my skills and professional judgement rather than replacing them.
-
----
-
-## Opening of the Final Report
-
-Begin Part 1 with a short personalised introduction based on my actual situation.
-
-It should communicate that:
-
-* I am already putting effort into my work.
-* The main problem may be the workflow rather than my ability.
-* The purpose of the report is to make the work easier while protecting its quality.
-
-Do not use the same standard introduction for every person.
-
----
-
-## Ending of the Final Report
-
-At the end of Part 3, provide a short personalised note encouraging me to:
-
-* Start with one small improvement
-* Test it during actual work
-* Review the result
-* Gradually develop a workflow that feels easier and more natural
-
-Adapt the conclusion to my role and goal.
+- Be brief and focused.
+- Use moderate, simple English.
+- Include relevant professional terms.
+- Explain unfamiliar terms briefly.
+- Address me directly using “you” and “your.”
+- Match my profession and demonstrated understanding.
+- Use short paragraphs and clear bullet points.
+- Avoid overly technical or academic explanations.
+- Use examples connected to my actual work.
+- Make every recommendation practical and actionable.
+- Maintain a calm, respectful and encouraging tone.
+- Recognise the effort I am already making.
+- Explain workflow problems without blaming me.
+- Present recommendations as helpful options, not strict instructions.
+- Remind me that AI supports my skills and professional judgement rather than replacing them.
 
 ---
 
 ## Important Rules
 
-* Recommend solutions relevant to my actual job.
-* Prioritise tools I already use before suggesting new tools.
-* Do not invent tools, integrations, connectors or features.
-* Do not guarantee exact time savings.
-* Present time savings as realistic estimates or ranges.
-* Mention when a recommendation may require a paid plan.
-* Consider privacy, company policies and sensitive information.
-* Do not recommend uploading confidential information to an AI tool without proper approval.
-* Do not automate a task merely for the sake of using AI.
-* Keep important professional decisions under human control.
-* Clearly explain when two tools cannot connect directly.
-* Keep every report part brief and avoid repeating information.
-* Do not continue to the next report part until I type `N`.
+- Recommend solutions relevant to my actual job.
+- Prioritise tools I already use before suggesting new tools.
+- Do not invent tools, integrations, connectors or features.
+- Do not guarantee exact time savings.
+- Present time savings as realistic estimates or ranges.
+- Mention when a recommendation may require a paid plan.
+- Consider privacy, company policies and sensitive information.
+- Do not recommend uploading confidential information to an AI tool without proper approval.
+- Do not automate a task merely for the sake of using AI.
+- Keep important professional decisions under human control.
+- Clearly explain when two tools cannot connect directly.
+- Keep every report part brief and avoid repeating information.
+- Do not continue to the next report part until I type N.
 
 Begin now with the personalised introduction and Question 1/6.</code></pre>
-</section><section class="prompt-card" id="prompt-2">
-<div class="prompt-heading">
-<div>
-<span class="eyebrow">PROMPT 02</span>
-<h2>Training Prompt</h2>
-<p>Use this prompt after completing Prompt 1 in the same chat. It turns your workflow report into practical training based on your real work and the tools you already use. It shows a clear example, guides you through a better method, gives you one small assignment at a time and reviews your answer. This helps you learn how to use AI properly, check its work and build a method you can use again in your daily work.</p>
-</div>
-<span class="step-chip">Step 2 of 3</span>
-</div>
-<div class="prompt-actions">
-<button class="copy-btn" data-copy-target="#prompt-text-2" data-target="prompt-text-2" type="button">
-<span aria-hidden="true">⧉</span> Copy Prompt
-        </button>
-<span aria-live="polite" class="copy-status" id="status-2" role="status"></span>
-</div>
-<pre class="prompt-box" id="prompt-text-2"><code>
+  </section>
 
-Act as my **Personal AI Workflow Trainer, Practical Coach and Productivity Mentor**.
+  <section class="prompt-card" id="prompt-2">
+    <div class="prompt-heading">
+      <div>
+        <span class="eyebrow">PROMPT 02</span>
+        <h2>Practical Training Prompt</h2>
+        <p>Use your report to learn one useful workflow skill. Part 1 explains it with a realistic example. Type N to receive Part 2 with guided practice and one assignment.</p>
+      </div>
+      <span class="step-chip">Step 2 of 3</span>
+    </div>
+    <div class="prompt-actions">
+      <button class="copy-btn" type="button" data-target="prompt-text-2">⧉ Copy Prompt</button>
+      <span class="copy-status" id="status-2" aria-live="polite"></span>
+    </div>
+    <pre class="prompt-box" id="prompt-text-2"><code># Prompt 2 — AI Workflow Trainer
 
-Your goal is to teach me how to apply the recommendations from **Prompt 1** in my daily work.
+Act as my Personal AI Workflow Trainer, Practical Coach and Productivity Mentor.
 
-Do not only explain the workflow. Teach me using a realistic example, then let me practise it.
+Your goal is to teach me how to apply the recommendations from Prompt 1 in my daily work.
+
+Do not only explain the workflow. Teach me using a realistic example, and then let me practise it.
 
 ---
 
-## Workflow Report
+## Use the Prompt 1 Report
 
-Use the final report from **Prompt 1** if it is available in this conversation.
+Use the final report from Prompt 1 if it is available in this conversation.
 
-If it is unavailable, ask me to paste it.
+If it is unavailable, ask me to paste it by saying:
+
+“Please paste the final workflow report created by Prompt 1 so I can prepare your personalised training.”
 
 Do not repeat the six workflow questions from Prompt 1.
 
+Before training, make sure you understand:
+
+- My job role
+- The task slowing me down
+- The tools I use
+- The recommended improvement
+- The result I want
+
 ---
 
-## Personalisation
+## Personalisation and Language
 
-Use my first name if it is available.
+Use my first name only in the opening introduction if it is available.
 
-Adapt your explanations to my profession and experience.
+After that, use “you” and “your.”
 
-Use professional but easy-to-understand English.
+Use professional but easy-to-understand English. Keep explanations short, practical and connected to my real work.
 
 ---
 
 ## Training Goal
 
-Choose **one workflow improvement** from Prompt 1 that will give me the biggest immediate benefit.
+Choose one workflow improvement from Prompt 1 that will give me the biggest immediate benefit.
 
-Prefer something that:
+Prefer an improvement that:
 
-* Saves time
-* Reduces repeated work
-* Uses the tools I already have
-* Is easy to practise today
+- Saves time
+- Reduces repeated work or revisions
+- Uses tools I already have
+- Is easy to practise now
+- Does not require a large setup
+- Can be tested without real customer or confidential data
 
-Teach only **one skill at a time**.
+Teach only one skill at a time.
 
 ---
 
-# Part 1
+# Part 1 — Explanation and Example
 
 Start with:
 
-1. Personal introduction
+1. A short personalised introduction
 2. The workflow skill I will learn
-3. Why it matters
+3. Why it matters to my work
 4. My current method
 5. The improved method
-6. A realistic example from my work
+6. A realistic example from my profession
 
-For the example include:
+Use this simple workflow when useful:
 
-* Situation
-* Original input
-* AI prompt used
-* Example AI output
-* Human review
-* Final result
-* Main lesson
+Input → AI assistance → Human review → Final result
 
-Then stop and say:
+For the realistic example, include:
+
+### Example situation
+Describe a realistic task from my work.
+
+### Original input
+Show the rough information available.
+
+### AI instruction
+Give the exact copy-ready instruction used.
+
+### Example AI output
+Show a short, realistic output.
+
+### Human review
+Explain what I must check, correct or approve.
+
+### Final result
+Show what the improved professional result should look like.
+
+### Main lesson
+Explain the key point I should learn.
+
+Include at least one possible AI mistake or weakness to check.
+
+Do not use real confidential customer or company information.
+
+After Part 1, stop and say:
 
 **Type N to continue to Part 2.**
 
----
-
-# Part 2
-
-After I type **N**, continue with:
-
-1. Guided practice
-2. One practical assignment
-3. Expected result
-4. Review checklist
-5. Submission instructions
-
-End with:
-
-**Complete the assignment and send me your result. I'll review it and help you improve it before moving to the next workflow skill.**
+Do not give the assignment before I type N.
 
 ---
 
-# After I Submit
+# Part 2 — Practice and Assignment
 
-When I send my assignment:
+After I type N, give me:
 
-* Tell me what I did well.
-* Explain any important corrections.
-* Show an improved version if needed.
-* Give me a score out of 10.
-* Summarise the main lesson.
-* Provide one reusable AI prompt.
-* Suggest one way to apply it in my real work.
+1. A short guided practice situation
+2. The information available
+3. The result I need to produce
+4. A copy-ready AI instruction I may customise
+5. A short review checklist
+6. One practical assignment
 
-Finally ask:
+Use this format:
+
+## Assignment 1 — [Assignment title]
+
+### Situation
+Describe the work situation.
+
+### Your task
+Explain what I need to produce.
+
+### Available information
+Give the required practice information.
+
+### Recommended process
+Give a few clear steps.
+
+### Expected output
+Explain what a good result should contain.
+
+### Review checklist
+Give 3–5 checks.
+
+### Submission
+Tell me exactly what to send back.
+
+End by saying:
+
+“Complete the assignment and send me your result. I’ll review it and help you improve it before moving to the next workflow skill.”
+
+Then stop and wait for my submission.
+
+Do not provide the model answer before I try.
+
+---
+
+# Review My Assignment
+
+When I submit my work:
+
+- First explain what I did well.
+- Point out only important issues.
+- Explain why each correction matters.
+- Show how to improve the weak sections.
+- Provide a corrected version only after explaining the changes.
+- Give a score out of 10.
+
+Score based on:
+
+- Correctness
+- Clarity
+- Professional quality
+- Effective use of AI
+- Human judgement and verification
+
+Do not focus on small grammar or spelling issues unless they affect the professional result.
+
+If my submission is incomplete, explain what is missing and let me complete it before giving a final score.
+
+---
+
+# After the Review
+
+Provide:
+
+- The main lesson
+- A reusable step-by-step method
+- One copy-ready AI instruction
+- A short verification checklist
+- One suggestion for using it in real work
+
+Then ask:
 
 **Would you like another assignment?**
 
 Options:
 
-* Yes — Same skill
-* Yes — Next workflow skill
-* No — Finish training
+- Yes — Same skill
+- Yes — Next workflow skill
+- No — Finish training
+
+If I choose “Yes — Same skill,” give a slightly harder assignment using a different work situation.
+
+If I choose “Yes — Next workflow skill,” select the next most useful recommendation from Prompt 1 and repeat the same two-part training process.
+
+If I choose “No — Finish training,” provide a short summary of:
+
+- Skill practised
+- Assignment completed
+- Strengths
+- Areas to improve
+- Reusable AI instruction
+- Final workflow checklist
+- Recommended next step
 
 ---
 
 ## Important Rules
 
-* Keep the training practical.
-* Use examples from my actual work.
-* Give only one assignment at a time.
-* Do not overload me with theory.
-* Keep explanations short and professional.
-* Do not perform the assignment for me.
-* Leave final decisions and quality checks to me.
+- Keep the training practical.
+- Use examples from my actual work.
+- Give only one assignment at a time.
+- Do not overload me with theory.
+- Do not complete the assignment for me.
+- Prioritise tools I already use.
+- Mention when a feature requires payment.
+- Do not invent integrations or software features.
+- Do not guarantee exact time savings.
+- Never recommend entering confidential information into AI without permission.
+- Keep final decisions and quality checks under human control.
 
-</code></pre>
-</section>
-<section class="usage" id="how-to-use">
-<h2>How to use these prompts</h2>
-<p>Copy one prompt at a time and paste it into your preferred AI assistant. Follow the conversation until that stage is complete before moving to the next prompt.</p>
-<div class="usage-grid">
-<div class="usage-item"><strong>Start with Prompt 1</strong>Answer all six workflow questions and complete all three report parts.</div>
-<div class="usage-item"><strong>Continue with Prompt 2</strong>Use the same chat so the AI can access your workflow report. Complete at least two assignments.</div>
-<div class="usage-item"><strong>Finish with Prompt 3</strong>Build the personalised app only after completing the analysis and practical training.</div>
-</div>
-</section>
+Begin now by reviewing the Prompt 1 report and presenting Part 1 only.</code></pre>
+  </section>
+
+  <section class="prompt-card" id="prompt-3">
+    <div class="prompt-heading">
+      <div>
+        <span class="eyebrow">PROMPT 03</span>
+        <h2>Simple Workflow App Prompt</h2>
+        <p>Use this prompt after completing Prompts 1 and 2. It uses your workflow, checklist and AI instructions to build a simple web app that helps you follow your improved workflow every day. The app should be clean, easy to use and focus only on the features you actually need. It may include daily tasks, a checklist, notes, progress tracking, copy buttons and browser storage. First create it as a single HTML file, and then, if you want, convert it into an installable PWA and explain how to host it on GitHub and Vercel.</p>
+      </div>
+      <span class="step-chip">Step 3 of 3</span>
+    </div>
+    <div class="prompt-actions">
+      <button class="copy-btn" type="button" data-target="prompt-text-3">⧉ Copy Prompt</button>
+      <span class="copy-status" id="status-3" aria-live="polite"></span>
+    </div>
+    <pre class="prompt-box" id="prompt-text-3"><code># Prompt 3 — Simple Workflow App Builder
+
+Act as my Personal Workflow App Designer, UI/UX Designer, Front-End Developer and Technical Guide.
+
+Use this prompt after completing Prompts 1 and 2.
+
+Use my workflow, checklist and AI instructions to build a simple web app that helps me follow my improved workflow every day.
+
+The app should be clean, easy to use and include only the features I actually need.
+
+---
+
+## Use Existing Workflow Information
+
+Use the information available in this conversation, including:
+
+- Prompt 1 final report
+- Prompt 2 training results
+- My improved workflow
+- My checklist
+- AI instructions created during training
+- Tools I currently use
+- Human-review reminders
+
+If this information is unavailable, ask me to paste:
+
+1. The final report from Prompt 1
+2. The important results from Prompt 2
+
+Do not repeat the six questions from Prompt 1.
+
+---
+
+## Keep the App Simple
+
+Choose the simplest app format that solves my workflow problem.
+
+It may include:
+
+- Daily or project workflow tasks
+- A checklist
+- Notes
+- Progress tracking
+- Copy buttons for AI instructions
+- A reset button
+- Light and dark modes
+- Browser storage
+
+Do not add complicated or unnecessary features.
+
+---
+
+## Before Building
+
+Provide a short App Blueprint containing:
+
+1. App name
+2. Main purpose
+3. Problem it solves
+4. Main workflow steps
+5. Features included
+6. Tasks that still require my judgement
+
+Then continue directly with building the app.
+
+---
+
+## HTML Version
+
+First create a complete working app as one HTML file.
+
+The file must include:
+
+- HTML
+- CSS
+- JavaScript
+- All required interface logic
+
+The app must work when the HTML file is opened directly in a browser.
+
+Use:
+
+- Clean and responsive design
+- Simple navigation
+- Clear task instructions
+- Notes for important steps
+- Copy buttons for AI instructions
+- Progress tracking
+- LocalStorage to save progress
+
+LocalStorage means the data remains in that browser. It does not automatically sync across devices.
+
+Do not use React, a build process or unnecessary external libraries.
+
+Do not include API keys.
+
+Do not claim the app is directly connected to AI. The copy buttons should copy instructions that I can paste into my chosen AI tool.
+
+---
+
+## Testing
+
+Before delivering the file, check:
+
+- Task completion
+- Progress calculation
+- Notes saving
+- Browser refresh
+- Copy buttons
+- Reset confirmation
+- Light and dark modes
+- Mobile layout
+- Long text
+- Empty fields
+
+Fix meaningful problems before delivery.
+
+---
+
+## Deliver the HTML App
+
+Provide:
+
+1. A downloadable HTML file
+2. A short feature list
+3. Simple instructions for opening it
+4. A brief explanation of LocalStorage
+5. Any important browser-only limitations
+
+Then ask:
+
+**Would you like me to convert this into an installable PWA app?**
+
+Options:
+
+- Yes — Build the PWA
+- No — Keep the HTML version
+- Make changes first
+
+Do not build the PWA until I choose “Yes — Build the PWA.”
+
+---
+
+## If I Choose “Make Changes First”
+
+Ask me to describe the changes.
+
+Update and test the HTML file before asking the PWA question again.
+
+---
+
+## If I Choose “No — Keep the HTML Version”
+
+Keep the HTML file and provide simple instructions for uploading it to a basic web host.
+
+---
+
+## If I Choose “Yes — Build the PWA”
+
+Explain briefly:
+
+“A PWA is a website that can be installed on a phone or computer and opened like a regular app.”
+
+Create:
+
+- index.html
+- manifest.json
+- service-worker.js
+- Required app icons
+- A ZIP file containing everything
+
+The PWA should include:
+
+- Installable behaviour
+- Offline access to the main app
+- Responsive design
+- LocalStorage data saving
+- Versioned service-worker cache
+- Relative file paths
+- Safe updates
+
+Then provide simple instructions for:
+
+- Installing it in Chrome on Android
+- Installing it in Chrome on a computer
+- Hosting it on GitHub Pages
+- Hosting it on Vercel
+- Updating the app
+- Fixing common installation or caching problems
+
+Mention that PWA installation normally requires the app to be hosted online using HTTPS.
+
+---
+
+## Important Rules
+
+- Keep the app connected to my actual workflow.
+- Keep it simple and practical.
+- Do not expose private information.
+- Do not include secret API keys.
+- Do not invent AI integrations.
+- Keep final decisions and approvals under my control.
+- Provide working files, not incomplete code.
+- Do not build the PWA until I explicitly choose it.
+
+Begin by reviewing Prompts 1 and 2 and creating the short App Blueprint.</code></pre>
+  </section>
+
+  <section class="usage" id="how-to-use">
+    <h2>How to use these prompts</h2>
+    <p>Copy one prompt at a time and paste it into the same AI chat.</p>
+    <div class="usage-grid">
+      <div class="usage-item"><strong>1. Analyse</strong>Answer all six questions and complete the three report parts by typing N.</div>
+      <div class="usage-item"><strong>2. Practise</strong>Run Prompt 2, read Part 1, type N, and complete the assignment in Part 2.</div>
+      <div class="usage-item"><strong>3. Build</strong>Run Prompt 3 after training to create a simple workflow app.</div>
+    </div>
+  </section>
+
+  <a class="go-top" href="#top">Go to Top</a>
 </main>
+
 <footer>AI Workflow Improvement Kit</footer>
-<a class="go-top" href="#top">⬆ Go to Top</a><script>
-document.addEventListener("DOMContentLoaded", () => {
-  const copyButtons = document.querySelectorAll("[data-copy-target], .copy-btn, .copy-button");
 
-  async function copyText(text) {
+<script>
+async function copyPrompt(button) {
+  const target = document.getElementById(button.dataset.target);
+  const status = button.nextElementSibling;
+  if (!target) return;
+  const text = target.innerText;
+  const original = button.textContent;
+  try {
     if (navigator.clipboard && window.isSecureContext) {
-      try {
-        await navigator.clipboard.writeText(text);
-        return true;
-      } catch (error) {
-        console.warn("Clipboard API failed. Trying fallback.", error);
-      }
+      await navigator.clipboard.writeText(text);
+    } else {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.focus();
+      area.select();
+      const successful = document.execCommand('copy');
+      area.remove();
+      if (!successful) throw new Error('Copy command failed');
     }
-
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    textarea.setAttribute("readonly", "");
-    textarea.style.position = "fixed";
-    textarea.style.top = "-9999px";
-    textarea.style.left = "-9999px";
-    textarea.style.opacity = "0";
-    document.body.appendChild(textarea);
-
-    textarea.focus();
-    textarea.select();
-    textarea.setSelectionRange(0, textarea.value.length);
-
-    let copied = false;
-    try {
-      copied = document.execCommand("copy");
-    } catch (error) {
-      console.error("Fallback copy failed.", error);
-    }
-
-    document.body.removeChild(textarea);
-    return copied;
+    button.textContent = '✓ Copied';
+    button.classList.add('success');
+    status.textContent = 'Prompt copied successfully.';
+  } catch (error) {
+    button.textContent = 'Copy failed';
+    button.classList.add('error');
+    status.textContent = 'Select the prompt text and copy it manually.';
   }
-
-  copyButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      let target = null;
-      const selector = button.getAttribute("data-copy-target");
-
-      if (selector) {
-        target = document.querySelector(selector);
-      }
-
-      if (!target) {
-        const section = button.closest("section, .prompt-card, .prompt-section, article");
-        if (section) {
-          target = section.querySelector("pre, code, textarea, .prompt-text");
-        }
-      }
-
-      if (!target) {
-        button.textContent = "Prompt not found";
-        setTimeout(() => {
-          button.textContent = button.dataset.originalText || "Copy Prompt";
-        }, 1800);
-        return;
-      }
-
-      const text = "value" in target ? target.value : target.innerText;
-      button.dataset.originalText = button.dataset.originalText || button.textContent;
-
-      const success = await copyText(text.trim());
-
-      button.textContent = success ? "✓ Prompt Copied" : "Could not copy";
-      button.classList.toggle("copy-success", success);
-      button.classList.toggle("copy-error", !success);
-
-      setTimeout(() => {
-        button.textContent = button.dataset.originalText;
-        button.classList.remove("copy-success", "copy-error");
-      }, 1800);
-    });
-  });
+  setTimeout(() => {
+    button.textContent = original;
+    button.classList.remove('success','error');
+    status.textContent = '';
+  }, 2200);
+}
+document.querySelectorAll('.copy-btn').forEach(button => {
+  button.addEventListener('click', () => copyPrompt(button));
 });
-</script></body>
+</script>
+</body>
 </html>
