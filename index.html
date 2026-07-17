@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Workflow Automation</title>
+  <title>AI Workflow Course</title>
   <style>
     :root{--ink:#192238;--muted:#5f6a80;--blue:#5267e8;--violet:#8c62da;--line:rgba(51,67,108,.12)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,a{font:inherit}
@@ -23,7 +23,7 @@
     <div class="wrap">
       <a class="brand" href="#" aria-label="AI Workflow Course home">
         <span class="brandLogo" aria-hidden="true">AI</span>
-        <span class="brandTitle">AI Workflow Automation</span>
+        <span class="brandTitle">AI Workflow Course</span>
       </a>
     </div>
   </header>
@@ -53,7 +53,7 @@
     <footer class="footer wrap"><div><p>© 2026 AI Workflow Course</p><a href="mailto:sanathselvakumaran@gmail.com">sanathselvakumaran@gmail.com</a></div><nav><button onclick="openPolicy('privacy')">Privacy Policy</button><button onclick="openPolicy('terms')">Terms</button><button onclick="openPolicy('refund')">Refund Policy</button></nav></footer>
   </main>
 
-  <div class="backdrop" id="payment" onclick="backdropClose(event,'payment')"><section class="modal"><button class="close" onclick="closeModal('payment')">×</button><p class="label">SMALL-STEP COURSE</p><h2>Begin your AI workflow course</h2><div class="price"><span class="old" id="oldPrice">₹199</span><strong id="price">₹199</strong><small>one-time payment</small></div><div class="shareBox" id="shareBox"><p>Share this two person you know who needs this and get a big discount</p><div class="progressRow"><div class="track"><span class="bar" id="bar"></span></div><strong id="count">0/2 shared</strong></div><button class="share" onclick="shareCourse()">Share ↗</button></div><div class="discount" id="discount">Discount unlocked — You save ₹164</div><p class="latte" id="latte">Reduce your work time to 4-5 hours at the price of a latte ☕</p><a class="pay" id="payLink" href="https://rzp.io/rzp/nJ0x8rub" target="_blank" rel="noopener">Pay ₹199</a><p class="disclaimer">This is a small-step digital course that provides prompts for you to execute in your own AI tool. AI responses can vary. Review all outputs before using them for important work. Payment does not guarantee a particular productivity result.</p></section></div>
+  <div class="backdrop" id="payment" onclick="backdropClose(event,'payment')"><section class="modal"><button class="close" onclick="closeModal('payment')">×</button><p class="label">SMALL-STEP COURSE</p><h2>Begin your AI workflow course</h2><div class="price"><span class="old" id="oldPrice">₹199</span><strong id="price">₹199</strong><small>one-time payment</small></div><div class="shareBox" id="shareBox"><p>Share this two person you know who needs this and get a big discount</p><div class="progressRow"><div class="track"><span class="bar" id="bar"></span></div><strong id="count">0/2 shared</strong></div><button class="share" onclick="shareCourse()">Share ↗</button></div><div class="discount" id="discount">Discount unlocked — You save ₹164</div><p class="latte" id="latte">Reduce your work time to 4-5 hours at the price of a latte ☕</p><a class="pay" id="payLink" href="https://rzp.io/rzp/nJ0x8rub" target="_blank" rel="noopener" onclick="markPayment()">Pay ₹199</a><p class="disclaimer">This is a small-step digital course that provides prompts for you to execute in your own AI tool. AI responses can vary. Review all outputs before using them for important work. Payment does not guarantee a particular productivity result.</p></section></div>
   <div class="backdrop" id="policy" onclick="backdropClose(event,'policy')"><section class="modal"><button class="close" onclick="closeModal('policy')">×</button><h2 id="policyTitle"></h2><p class="policyText" id="policyText"></p></section></div>
 
   <script>
@@ -61,6 +61,7 @@
     function openPayment(){document.getElementById('payment').classList.add('show');updateShareUI()}
     function closeModal(id){document.getElementById(id).classList.remove('show')}
     function backdropClose(e,id){if(e.target.id===id)closeModal(id)}
+    function markPayment(){localStorage.setItem('paymentsucess','45')}
     function updateShareUI(){const unlocked=shares>=2;document.getElementById('count').textContent=shares+'/2 shared';document.getElementById('bar').style.width=(shares*50)+'%';document.getElementById('price').textContent=unlocked?'₹35':'₹199';document.getElementById('oldPrice').style.display=unlocked?'inline':'none';document.getElementById('shareBox').style.display=unlocked?'none':'block';document.getElementById('discount').style.display=unlocked?'block':'none';document.getElementById('latte').style.display=unlocked?'block':'none';const pay=document.getElementById('payLink');pay.textContent=unlocked?'Pay ₹35':'Pay ₹199';pay.href=unlocked?'https://rzp.io/rzp/8jgR83g6':'https://rzp.io/rzp/nJ0x8rub'}
     async function shareCourse(){
       try{
@@ -72,7 +73,7 @@ Automate your existing workflow with AI and save up to 40% of your work time. �
 
 It will also help you build a personalised app in your name. 📱
 
-Link 🔗 :https://ai-automate-workflow.vercel.app/`
+Link: [https://ai-automate-workflow.vercel.app/](https://ai-automate-workflow.vercel.app/)`
         };
         if(navigator.share)await navigator.share(data);
         else await navigator.clipboard.writeText(data.text);
