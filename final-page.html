@@ -84,7 +84,31 @@ color:#fff;
 
 .copy-success { background: #15803d !important; color: #fff !important; }
 .copy-error { background: #b91c1c !important; color: #fff !important; }
-html{visibility:hidden;}</style>
+html{visibility:hidden;}
+.main-instruction{
+  max-width:1100px;
+  margin:24px auto 32px;
+  padding:24px 28px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+  border:1px solid rgba(37,99,235,.18);
+  box-shadow:0 12px 30px rgba(15,23,42,.08);
+}
+.main-instruction h2{
+  margin:0;
+  text-align:center;
+  font-size:clamp(1.7rem,4vw,3rem);
+  line-height:1.25;
+  font-weight:800;
+  letter-spacing:-0.02em;
+}
+@media (max-width:640px){
+  .main-instruction{
+    margin:18px 14px 24px;
+    padding:20px 16px;
+  }
+}
+</style>
 </head>
 <body id="top">
 <header class="hero">
@@ -110,7 +134,7 @@ html{visibility:hidden;}</style>
 </div>
 </aside>
 </div>
-</header>
+</header><section class="main-instruction"><h2>Copy the following prompts and execute them in any AI model of your choice. Make sure all prompts are used in a single chat.</h2></section>
 <main class="container">
 <div class="notice"><strong>Before you begin:</strong> Read the instructions before running each prompt. The prompts are detailed so the AI can guide you correctly, but you only need to answer or act on one small step at a time.</div>
 <nav aria-label="Prompt navigation" class="prompt-nav">
