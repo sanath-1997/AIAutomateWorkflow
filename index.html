@@ -54,7 +54,25 @@
     function closeModal(id){document.getElementById(id).classList.remove('show')}
     function backdropClose(e,id){if(e.target.id===id)closeModal(id)}
     function updateShareUI(){const unlocked=shares>=2;document.getElementById('count').textContent=shares+'/2 shared';document.getElementById('bar').style.width=(shares*50)+'%';document.getElementById('price').textContent=unlocked?'₹35':'₹199';document.getElementById('oldPrice').style.display=unlocked?'inline':'none';document.getElementById('shareBox').style.display=unlocked?'none':'block';document.getElementById('discount').style.display=unlocked?'block':'none';document.getElementById('latte').style.display=unlocked?'block':'none';const pay=document.getElementById('payLink');pay.textContent=unlocked?'Pay ₹35':'Pay ₹199';pay.href=unlocked?'https://rzp.io/rzp/8jgR83g6':'https://rzp.io/rzp/nJ0x8rub'}
-    async function shareCourse(){try{const data={title:'AI Workflow Course',text:'Use AI to reduce repetitive work and build a better workflow.',url:location.href};if(navigator.share)await navigator.share(data);else await navigator.clipboard.writeText(data.text+' '+data.url);shares=Math.min(shares+1,2);localStorage.setItem('workflow-course-share-count',shares);updateShareUI()}catch(e){}}
+    async function shareCourse(){
+      try{
+        const data={
+          title:'AI Workflow Course',
+          text:`Tired of working long hours? 😓
+
+Automate your existing workflow with AI and save up to 40% of your work time. ⚡
+
+It will also help you build a personalised app in your name. 📱
+
+Link: [https://ai-automate-workflow.vercel.app/](https://ai-automate-workflow.vercel.app/)`
+        };
+        if(navigator.share)await navigator.share(data);
+        else await navigator.clipboard.writeText(data.text);
+        shares=Math.min(shares+1,2);
+        localStorage.setItem('workflow-course-share-count',shares);
+        updateShareUI();
+      }catch(e){}
+    }
     const policies={privacy:['Privacy Policy','This page stores your share count in your browser using local storage. This information remains on your device. The payment provider may collect the details necessary to process your payment under its own privacy policy. Do not enter sensitive information into course prompts unless you are authorised to use it.'],terms:['Terms','This digital course provides educational prompts and workflow guidance. You are responsible for reviewing AI-generated results and deciding whether they are suitable for your work. Do not use the prompts for unlawful activity or submit confidential third-party information without permission.'],refund:['Refund Policy','Refunds are unavailable due to the nature of this digital product. However, support will be provided if you experience any access or usage issues.']};
     function openPolicy(type){document.getElementById('policyTitle').textContent=policies[type][0];document.getElementById('policyText').textContent=policies[type][1];document.getElementById('policy').classList.add('show')}
     updateShareUI();
