@@ -9,16 +9,19 @@
 </style>
 
 <script>
+    <style>
+    html {
+        visibility: hidden;
+    }
+</style>
+
+<script>
     const storedAccess = localStorage.getItem("paidContentAccess");
 
     try {
         const access = JSON.parse(storedAccess);
 
-        if (
-            access &&
-            access.paid === true &&
-            access.paymentId
-        ) {
+        if (access && access.paid === true) {
             document.documentElement.style.visibility = "visible";
         } else {
             window.location.replace("index.html");
